@@ -3,14 +3,15 @@ package connector;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.gagarkin.gxfin.gate.quik.dto.AllTradesPackage;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTrade;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTradesPackage;
 
 import java.sql.Time;
 import java.time.LocalTime;
 
 public class TestConnectorParsers {
     @Test
-    public void testJacksonAndTestObject() throws Exception {
+    public void testJsonAndTestObject() throws Exception {
         final String etalonJson = "{\"str-val\":\"AAA\",\"val2\":\"BBB\",\"val3\":null,\"inner\":{\"val1\":10,\"val2\":\"12:15:33\"}}";
         /*
         LocalTime lt = LocalTime.parse("12:15:33");
@@ -35,7 +36,75 @@ public class TestConnectorParsers {
     }
 
     @Test
-    public void testJacksonGetAllTradesPackage() throws Exception {
+    public void testJsonAndTestPackage() throws Exception {
+        Time t = Time.valueOf(LocalTime.parse("12:15:33"));
+        TestPackage testPackage = new TestPackage();
+
+        TestObject testObject = new TestObject("AAA", "BBB", null, new TestInnerObject(10, t));
+        testPackage.getRows().add(testObject);
+
+        testObject = new TestObject("CCC", "DDD", null, new TestInnerObject(20, Time.valueOf(LocalTime.parse("23:59:59"))));
+        testPackage.getRows().add(testObject);
+
+        String testJson;
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        testJson = objectMapper.writeValueAsString(testPackage);
+        System.out.println(testJson);
+
+        testPackage = objectMapper.readValue(testJson, TestPackage.class);
+    }
+
+    @Test
+    public void testJson2AllTrade() throws Exception {
+        //*
+        String testMessage = "{\n" +
+                "            \"row_index\": \"1\",\n" +
+                "            \"trade_num\": \"3518016102\",\n" +
+                "            \"flags\": \"1025\",\n" +
+                "            \"price\": \"0.79\",\n" +
+                "            \"qty\": \"25.0\",\n" +
+                "            \"value\": \"19750.0\",\n" +
+                "            \"accruedint\": \"0.0\",\n" +
+                "            \"yield\": \"0.0\",\n" +
+                "            \"settlecode\": \"Y2\",\n" +
+                "            \"reporate\": \"0.0\",\n" +
+                "            \"repovalue\": \"0.0\",\n" +
+                "            \"repo2value\": \"0.0\",\n" +
+                "            \"repoterm\": \"0\",\n" +
+                "            \"sec_code\": \"HYDR\",\n" +
+                "            \"class_code\": \"TQBR\",\n" +
+                "            \"datetime\": \"2021-01-25T09:59:31.000\",\n" +
+                "            \"period\": \"0\",\n" +
+                "            \"open_interest\": \"0\",\n" +
+                "            \"exchange_code\": \"\"\n" +
+                "}\n";
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        QuikAllTrade testQuikAllTrade = objectMapper.readValue(testMessage,  QuikAllTrade.class);
+
+        Assertions.assertEquals(1, testQuikAllTrade.getRowIndex(), "Ошибка Jackson-десериализации (row_index в rowIndex) json-строки в AllTrade");
+        Assertions.assertEquals("3518016102", testQuikAllTrade.tradeNum, "Ошибка Jackson-десериализации (trade_num в 3518016102) json-строки в AllTrade");
+    }
+
+
+    @Test
+    public void testJson2AllTradesPackageShort() throws Exception {
+        String testMessage = "{\n" +
+                "    \"all_count\": 1457762,\n" +
+                "    \"package_size\": 18\n" +
+                "}\n";
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        TestPackage testPackage = objectMapper.readValue(testMessage,  TestPackage.class);
+
+        Assertions.assertEquals(1457762, testPackage.quikAllCount, "Ошибка Jackson-десериализации (all_count в allCount) json-строки в AllTradesPackage");
+        Assertions.assertEquals(18, testPackage.quikPackageSize, "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
+    }
+
+    @Test
+    public void testJson2AllTradesPackage() throws Exception {
         //*
         String testMessage = "{\n" +
                 "    \"all_count\": 1457762,\n" +
@@ -85,10 +154,11 @@ public class TestConnectorParsers {
                 "}\n";
         ObjectMapper objectMapper = new ObjectMapper();
 
-        AllTradesPackage tradesPackage = objectMapper.readValue(testMessage,  AllTradesPackage.class);
+        QuikAllTradesPackage tradesPackage = objectMapper.readValue(testMessage,  QuikAllTradesPackage.class);
 
-        Assertions.assertEquals(1457762, tradesPackage.allCount, "Ошибка Jackson-десериализации (all_count в allCount) json-строки в AllTradesPackage");
-        Assertions.assertEquals(18, tradesPackage.packageSize, "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
-        Assertions.assertNotNull(tradesPackage.rows,  "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage");
+        Assertions.assertEquals(1457762, tradesPackage.quikAllCount, "Ошибка Jackson-десериализации (all_count в allCount) json-строки в AllTradesPackage");
+        Assertions.assertEquals(18, tradesPackage.quikPackageSize, "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
+        Assertions.assertNotNull(tradesPackage.getItems(),  "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage");
+        Assertions.assertEquals(18, tradesPackage.size(), "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage - количество записей");
     }
 }

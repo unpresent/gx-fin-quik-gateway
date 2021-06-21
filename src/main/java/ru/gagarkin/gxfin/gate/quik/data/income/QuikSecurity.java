@@ -1,11 +1,11 @@
-package ru.gagarkin.gxfin.gate.quik.dto;
+package ru.gagarkin.gxfin.gate.quik.data.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Инструмент
  */
-public class Security extends StandardDtoObject{
+public class QuikSecurity extends QuikStandardDataObject {
     /**
      * Код инструмента
      */

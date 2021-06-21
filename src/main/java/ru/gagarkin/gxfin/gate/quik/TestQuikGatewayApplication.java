@@ -2,11 +2,21 @@ package ru.gagarkin.gxfin.gate.quik;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.gagarkin.gxfin.gate.quik.connector.QuikConnector;
+import ru.gagarkin.gxfin.gate.quik.data.internal.*;
+
+import java.time.LocalDateTime;
 
 @Slf4j
+// @SpringBootApplication
 public class TestQuikGatewayApplication {
     private static QuikConnector connector;
 
+    public static void main(String[] args) {
+        Class cls = Security.class;
+        for (var field : cls.getFields()) {
+            System.out.println("    this." + field.getName() + " = sourceDataObject." + field.getName() + ";");
+        }
+    }
     /*
     public static void main(String[] args) throws Exception {
         final int packageSizeLimit = 50;
@@ -19,12 +29,11 @@ public class TestQuikGatewayApplication {
             log.error("Не удалось установить соединение с Quik-Pipe-ом");
             throw new Exception("Не удалось установить соединение с Quik-Pipe-ом");
         }
-
         try {
             int limmitLoadCount = 100000;
             int i = 0;
             LocalDateTime started = LocalDateTime.now();
-
+            /*
             for (; i < limmitLoadCount; ) {
                 AllTradesPackage allTradesPackage = connector.getAllTradesPackage(i, packageSizeLimit);
                 limmitLoadCount = allTradesPackage.allCount < limmitLoadCount ? (int)allTradesPackage.allCount : limmitLoadCount;
@@ -45,5 +54,5 @@ public class TestQuikGatewayApplication {
             connector.disconnect();
         }
     }
-    */
+    //*/
 }

@@ -1,6 +1,6 @@
 package ru.gagarkin.gxfin.gate.quik.commands;
 
-import ru.gagarkin.gxfin.gate.quik.dto.OrdersPackage;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikOrdersPackage;
 
 /**
  * Команда на получение пакета Заявок, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit
@@ -16,6 +16,6 @@ public class QuikNamedPipeCommandGetOrdersPackage extends QuikNamedPipeCommandSt
 
     @Override
     public Class resultClass() {
-        return OrdersPackage.class;
+        return QuikOrdersPackage.class;
     }
 }

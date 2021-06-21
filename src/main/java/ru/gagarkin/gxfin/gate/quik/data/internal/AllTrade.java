@@ -1,107 +1,109 @@
-package ru.gagarkin.gxfin.gate.quik.dto;
+package ru.gagarkin.gxfin.gate.quik.data.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTrade;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikStandardDataObject;
 
 import java.util.Date;
 
 /**
  * Обезличенная сделка
  */
-public class AllTrade extends StandardDtoObject {
+public class AllTrade extends StandardDataObject {
     /**
      * Номер сделки в торговой системе
      */
-    @JsonProperty(value = "trade_num")
+    @JsonProperty
     public String tradeNum;
 
     /**
      * Набор битовых флагов
      */
-    @JsonProperty(value = "flags")
+    @JsonProperty
     public int flags;
 
     /**
      * Дата и время
      */
-    @JsonProperty(value = "datetime")
+    @JsonProperty
     public Date tradeDateTime;
 
     /**
      * Код биржи в торговой системе
      */
-    @JsonProperty(value = "exchange_code")
+    @JsonProperty
     public String exchangeCode;
 
     /**
      * Код класса
      */
-    @JsonProperty(value = "class_code")
+    @JsonProperty
     public String classCode;
 
     /**
      * Код бумаги заявки
      */
-    @JsonProperty(value = "sec_code")
+    @JsonProperty
     public String secCode;
 
     /**
      * Цена
      */
-    @JsonProperty(value = "price")
+    @JsonProperty
     public double price;
 
     /**
      * Количество бумаг в последней сделке в лотах
      */
-    @JsonProperty(value = "qty")
+    @JsonProperty
     public double quantity;
 
     /**
      * Объем в денежных средствах
      */
-    @JsonProperty(value = "value")
+    @JsonProperty
     public double value;
 
     /**
      * Накопленный купонный доход
      */
-    @JsonProperty(value = "accruedint")
+    @JsonProperty
     public double accruedInterest;
 
     /**
      * Доходность
      */
-    @JsonProperty(value = "yield")
+    @JsonProperty
     public double yield;
 
     /**
      * Код расчетов
      */
-    @JsonProperty(value = "settlecode")
+    @JsonProperty
     public String settleCode;
 
     /**
      * Ставка РЕПО (%)
      */
-    @JsonProperty(value = "reporate")
+    @JsonProperty
     public double repoRate;
 
     /**
      * Сумма РЕПО
      */
-    @JsonProperty(value = "repovalue")
+    @JsonProperty
     public double repoValue;
 
     /**
      * Объем выкупа РЕПО
      */
-    @JsonProperty(value = "repo2value")
+    @JsonProperty
     public double repo2Value;
 
     /**
      * Срок РЕПО в днях
      */
-    @JsonProperty(value = "repoterm")
+    @JsonProperty
     public int repoTerm;
 
     /**
@@ -110,12 +112,39 @@ public class AllTrade extends StandardDtoObject {
      * «1» – Нормальный;
      * «2» – Закрытие
      */
-    @JsonProperty(value = "period")
+    @JsonProperty
     public short period;
 
     /**
      * Открытый интерес
      */
-    @JsonProperty(value = "open_interest")
+    @JsonProperty
     public int openInterest;
+
+    protected AllTrade() {
+        super();
+    }
+
+    protected AllTrade(QuikStandardDataObject quikDataObject) {
+        super(quikDataObject);
+        var sourceDataObject = (QuikAllTrade) quikDataObject;
+        this.tradeNum = sourceDataObject.tradeNum;
+        this.flags = sourceDataObject.flags;
+        this.tradeDateTime = sourceDataObject.tradeDateTime;
+        this.exchangeCode = sourceDataObject.exchangeCode;
+        this.classCode = sourceDataObject.classCode;
+        this.secCode = sourceDataObject.secCode;
+        this.price = sourceDataObject.price;
+        this.quantity = sourceDataObject.quantity;
+        this.value = sourceDataObject.value;
+        this.accruedInterest = sourceDataObject.accruedInterest;
+        this.yield = sourceDataObject.yield;
+        this.settleCode = sourceDataObject.settleCode;
+        this.repoRate = sourceDataObject.repoRate;
+        this.repoValue = sourceDataObject.repoValue;
+        this.repo2Value = sourceDataObject.repo2Value;
+        this.repoTerm = sourceDataObject.repoTerm;
+        this.period = sourceDataObject.period;
+        this.openInterest = sourceDataObject.openInterest;
+    }
 }

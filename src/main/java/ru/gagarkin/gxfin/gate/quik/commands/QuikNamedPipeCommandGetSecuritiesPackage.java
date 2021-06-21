@@ -1,6 +1,6 @@
 package ru.gagarkin.gxfin.gate.quik.commands;
 
-import ru.gagarkin.gxfin.gate.quik.dto.SecuritiesPackage;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikSecuritiesPackage;
 
 /**
  * Команда на получение пакета ФИ, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit
@@ -15,6 +15,6 @@ public class QuikNamedPipeCommandGetSecuritiesPackage extends QuikNamedPipeComma
 
     @Override
     public Class resultClass() {
-        return SecuritiesPackage.class;
+        return QuikSecuritiesPackage.class;
     }
 }

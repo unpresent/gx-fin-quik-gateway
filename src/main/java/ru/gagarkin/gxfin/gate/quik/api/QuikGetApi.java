@@ -1,7 +1,7 @@
 package ru.gagarkin.gxfin.gate.quik.api;
 
+import ru.gagarkin.gxfin.gate.quik.data.income.*;
 import ru.gagarkin.gxfin.gate.quik.errors.QuikConnectorException;
-import ru.gagarkin.gxfin.gate.quik.dto.*;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public interface QuikGetApi {
      * @throws QuikConnectorException
      * @throws IOException
      */
-    AllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    QuikAllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет поручений
@@ -29,7 +29,7 @@ public interface QuikGetApi {
      * @throws QuikConnectorException
      * @throws IOException
      */
-    OrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    QuikOrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет сделок
@@ -39,7 +39,7 @@ public interface QuikGetApi {
      * @throws QuikConnectorException
      * @throws IOException
      */
-    DealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    QuikDealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет сделок
@@ -49,7 +49,7 @@ public interface QuikGetApi {
      * @throws QuikConnectorException
      * @throws IOException
      */
-    SecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    QuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить состяние сессии Quik-а
@@ -57,5 +57,5 @@ public interface QuikGetApi {
      * @throws QuikConnectorException
      * @throws IOException
      */
-    SessionState getSessionState() throws QuikConnectorException, IOException;
+    QuikSessionState getSessionState() throws QuikConnectorException, IOException;
 }

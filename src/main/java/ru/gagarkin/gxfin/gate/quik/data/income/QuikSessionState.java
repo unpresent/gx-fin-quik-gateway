@@ -1,10 +1,11 @@
-package ru.gagarkin.gxfin.gate.quik.dto;
+package ru.gagarkin.gxfin.gate.quik.data.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.gagarkin.gxfin.common.data.AbstractDataObject;
 
 import java.sql.Time;
 
-public class SessionState extends AbstractDtoObject {
+public class QuikSessionState extends AbstractDataObject {
     /**
      * Открыто ли соединение Quik с сервером
      */

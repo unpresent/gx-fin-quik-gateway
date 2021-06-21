@@ -6,7 +6,8 @@ import ru.gagarkin.gxfin.gate.quik.api.ConnectorState;
 import ru.gagarkin.gxfin.gate.quik.api.QuikConnectionApi;
 import ru.gagarkin.gxfin.gate.quik.api.QuikGetApi;
 import ru.gagarkin.gxfin.gate.quik.commands.*;
-import ru.gagarkin.gxfin.gate.quik.dto.*;
+import ru.gagarkin.gxfin.gate.quik.data.income.*;
+import ru.gagarkin.gxfin.gate.quik.data.internal.StandardDataObject;
 import ru.gagarkin.gxfin.gate.quik.errors.QuikConnectorException;
 
 import java.io.IOException;
@@ -113,7 +114,7 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
         }
     }
 
-    protected <P extends StandardPackage> P getStandardPackage
+    protected <P extends QuikStandardDataPackage> P getStandardPackage
             (QuikNamedPipeCommandStandardGet getCommand, long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
         synchronized (this) {
             checkIsActive("get " + getCommand.getCommandName());
@@ -128,39 +129,42 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
             Class<P> packageType = getCommand.resultClass();
             P result = this.objectMapper.readValue(receivedMessage, packageType);
 
-            int lastLoadedRowIndex = result.rows.length > 0 ? result.rows[result.rows.length - 1].rowIndex : -1;
-            log.debug("{}: packageSize = {}; loadedIndex = {}", result.getClass().getSimpleName(), result.packageSize, lastLoadedRowIndex);
+            int lastLoadedRowIndex = result.size() > 0 ? result.getRow(result.size() - 1).getRowIndex() : -1;
+            log.debug("{}: packageSize = {}; loadedIndex = {}", result.getClass().getSimpleName(), result.quikPackageSize, lastLoadedRowIndex);
+            if (result.quikPackageSize != result.size()) {
+                log.error("Неверный packageSize == {}; result.size() == {}", result.quikPackageSize, result.size());
+            }
 
             return result;
         }
     }
 
     @Override
-    public AllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        AllTradesPackage result = getStandardPackage(this.commandGetAllTradesPackage, fromRowIndex, packageSizeLimit);
+    public QuikAllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
+        QuikAllTradesPackage result = getStandardPackage(this.commandGetAllTradesPackage, fromRowIndex, packageSizeLimit);
         return result;
     }
 
     @Override
-    public OrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        OrdersPackage result = getStandardPackage(this.commandGetOrdersPackage, fromRowIndex, packageSizeLimit);
+    public QuikOrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
+        QuikOrdersPackage result = getStandardPackage(this.commandGetOrdersPackage, fromRowIndex, packageSizeLimit);
         return result;
     }
 
     @Override
-    public DealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        DealsPackage result = getStandardPackage(this.commandGetDealsPackage, fromRowIndex, packageSizeLimit);
+    public QuikDealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
+        QuikDealsPackage result = getStandardPackage(this.commandGetDealsPackage, fromRowIndex, packageSizeLimit);
         return result;
     }
 
     @Override
-    public SecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        SecuritiesPackage result = getStandardPackage(this.commandGetSecuritiesPackage, fromRowIndex, packageSizeLimit);
+    public QuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
+        QuikSecuritiesPackage result = getStandardPackage(this.commandGetSecuritiesPackage, fromRowIndex, packageSizeLimit);
         return result;
     }
 
     @Override
-    public SessionState getSessionState() throws QuikConnectorException, IOException {
+    public QuikSessionState getSessionState() throws QuikConnectorException, IOException {
         synchronized (this) {
             checkIsActive("get " + commandGetSessionState.getCommandName());
 
@@ -168,7 +172,7 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
             this.pipeController.sendMessage(commandMessage);
 
             String receivedMessage = this.pipeController.receiveMessage();
-            SessionState result = this.objectMapper.readValue(receivedMessage, SessionState.class);
+            QuikSessionState result = this.objectMapper.readValue(receivedMessage, QuikSessionState.class);
 
             log.debug("{}.getSessionState(): sessionId = {}; isConnected = {}; ConnectionTime = {}", this.getClass().getSimpleName(), result.sessionId, result.isConnected, result.connectionTime);
 

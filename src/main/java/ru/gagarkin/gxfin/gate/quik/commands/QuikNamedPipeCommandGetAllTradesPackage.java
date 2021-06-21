@@ -1,6 +1,6 @@
 package ru.gagarkin.gxfin.gate.quik.commands;
 
-import ru.gagarkin.gxfin.gate.quik.dto.AllTradesPackage;
+import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTradesPackage;
 
 /**
  * Команда на получение пакета Обезличенных Сделок, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit
@@ -15,6 +15,6 @@ public class QuikNamedPipeCommandGetAllTradesPackage extends QuikNamedPipeComman
 
     @Override
     public Class resultClass() {
-        return AllTradesPackage.class;
+        return QuikAllTradesPackage.class;
     }
 }
