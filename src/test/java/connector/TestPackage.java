@@ -2,7 +2,7 @@ package connector;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import ru.gagarkin.gxfin.common.data.AbstractDataPackage;
+import ru.gxfin.common.data.AbstractDataPackage;
 
 import java.util.ArrayList;
 import java.util.List;

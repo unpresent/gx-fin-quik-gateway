@@ -2,7 +2,7 @@ package connector;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import ru.gagarkin.gxfin.common.data.AbstractDataObject;
+import ru.gxfin.common.data.AbstractDataObject;
 
 @Getter
 public class TestObject extends AbstractDataObject {

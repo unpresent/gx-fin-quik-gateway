@@ -1,10 +1,12 @@
 package connector;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTrade;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.data.income.QuikAllTrade;
+import ru.gxfin.gate.quik.data.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.data.internal.AllTradesPackage;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -152,13 +154,17 @@ public class TestConnectorParsers {
                 "        }\n" +
                 "    ]\n" +
                 "}\n";
-        ObjectMapper objectMapper = new ObjectMapper();
+        final var objectMapper = new ObjectMapper()
+                .registerModule(new JavaTimeModule());
 
-        QuikAllTradesPackage tradesPackage = objectMapper.readValue(testMessage,  QuikAllTradesPackage.class);
+        final var tradesPackage = objectMapper.readValue(testMessage,  QuikAllTradesPackage.class);
 
-        Assertions.assertEquals(1457762, tradesPackage.quikAllCount, "Ошибка Jackson-десериализации (all_count в allCount) json-строки в AllTradesPackage");
-        Assertions.assertEquals(18, tradesPackage.quikPackageSize, "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
+        Assertions.assertEquals(1457762, tradesPackage.getQuikAllCount(), "Ошибка Jackson-десериализации (all_count в allCount) json-строки в AllTradesPackage");
+        Assertions.assertEquals(18, tradesPackage.getQuikPackageSize(), "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
         Assertions.assertNotNull(tradesPackage.getItems(),  "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage");
-        Assertions.assertEquals(18, tradesPackage.size(), "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage - количество записей");
+        // Assertions.assertEquals(18, tradesPackage.size(), "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage - количество записей");
+
+        final var stdAllTrades = new AllTradesPackage(tradesPackage);
+        testMessage = objectMapper.writeValueAsString(stdAllTrades);
     }
 }

@@ -2,10 +2,10 @@ package connector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.gagarkin.gxfin.gate.quik.connector.QuikConnector;
-import ru.gagarkin.gxfin.gate.quik.errors.QuikConnectorException;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikAllTradesPackage;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikSessionState;
+import ru.gxfin.gate.quik.connector.QuikConnector;
+import ru.gxfin.gate.quik.errors.QuikConnectorException;
+import ru.gxfin.gate.quik.data.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.data.income.QuikSessionState;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -28,13 +28,13 @@ public class TestConnector {
             int limmitLoadCount = 1000;
             QuikSessionState sessionState = this.connector.getSessionState();
             System.out.println(sessionState);
-            Assertions.assertEquals(true, sessionState.isConnected, "Не удалось установить соединение с Quik-Pipe-ом");
+            Assertions.assertEquals(true, sessionState.isConnected(), "Не удалось установить соединение с Quik-Pipe-ом");
 
             int i = 0;
             for (; i < limmitLoadCount;) {
                 QuikAllTradesPackage allTradesPackage = this.connector.getAllTradesPackage(i, packageSizeLimit);
-                limmitLoadCount = allTradesPackage.quikAllCount < limmitLoadCount ? (int)allTradesPackage.quikAllCount : limmitLoadCount;
-                i += allTradesPackage.quikPackageSize;
+                limmitLoadCount = allTradesPackage.getQuikAllCount() < limmitLoadCount ? (int)allTradesPackage.getQuikAllCount() : limmitLoadCount;
+                i += allTradesPackage.getQuikPackageSize();
                 System.out.println("Loaded: " + i);
             }
             Assertions.assertEquals( true, i >= limmitLoadCount, "Количество загруженных анонимных сделок меньше нормы");
