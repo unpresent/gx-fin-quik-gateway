@@ -1,6 +1,6 @@
 package ru.gxfin.gate.quik.commands;
 
-import ru.gxfin.gate.quik.data.income.QuikDealsPackage;
+import ru.gxfin.gate.quik.model.income.QuikDealsPackage;
 
 /**
  * Команда на получение пакета Сделок, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit

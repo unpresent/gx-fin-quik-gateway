@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.gxfin.gate.quik.connector.QuikConnector;
 import ru.gxfin.gate.quik.errors.QuikConnectorException;
-import ru.gxfin.gate.quik.data.income.QuikAllTradesPackage;
-import ru.gxfin.gate.quik.data.income.QuikSessionState;
+import ru.gxfin.gate.quik.model.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.model.income.QuikSessionState;
 
 import java.io.IOException;
 import java.util.logging.Level;

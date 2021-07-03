@@ -6,7 +6,7 @@ import ru.gxfin.gate.quik.api.ConnectorState;
 import ru.gxfin.gate.quik.api.QuikConnectionApi;
 import ru.gxfin.gate.quik.api.QuikGetApi;
 import ru.gxfin.gate.quik.commands.*;
-import ru.gxfin.gate.quik.data.income.*;
+import ru.gxfin.gate.quik.model.income.*;
 import ru.gxfin.gate.quik.errors.QuikConnectorException;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
-package ru.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.internal;
 
-import ru.gxfin.gate.quik.data.income.QuikStandardDataObject;
-import ru.gxfin.gate.quik.data.income.QuikStandardDataPackage;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataPackage;
 
 public class DealsPackage extends StandardDataPackage<Deal> {
     public DealsPackage() {

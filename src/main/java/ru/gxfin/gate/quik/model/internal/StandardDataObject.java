@@ -1,8 +1,8 @@
-package ru.gagarkin.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ru.gagarkin.gxfin.common.data.AbstractDataObject;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikStandardDataObject;
+import ru.gxfin.common.data.AbstractDataObject;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
 
 public abstract class StandardDataObject extends AbstractDataObject {
     /**
@@ -11,7 +11,7 @@ public abstract class StandardDataObject extends AbstractDataObject {
     @JsonProperty
     public int rowIndex;
 
-    protected StandardDataObject() {
+    public StandardDataObject() {
         super();
     }
 

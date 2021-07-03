@@ -1,10 +1,11 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -60,31 +61,31 @@ public class QuikDeal extends QuikStandardDataObject {
      * Цена
      */
     @JsonProperty(value = "price")
-    private double price;
+    private BigDecimal price;
 
     /**
      * Количество в лотах
      */
     @JsonProperty(value = "qty")
-    private double quantity;
+    private BigDecimal quantity;
 
     /**
      * Объем в денежных средствах
      */
     @JsonProperty(value = "value")
-    private double value;
+    private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
     @JsonProperty(value = "accruedint")
-    private double accruedInterest;
+    private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
     @JsonProperty(value = "yield")
-    private double yield;
+    private BigDecimal yield;
 
     /**
      * Код расчетов
@@ -108,13 +109,13 @@ public class QuikDeal extends QuikStandardDataObject {
      * Цена выкупа
      */
     @JsonProperty(value = "price2")
-    private double price2;
+    private BigDecimal price2;
 
     /**
      * Ставка РЕПО (%)
      */
     @JsonProperty(value = "reporate")
-    private double repoRate;
+    private BigDecimal repoRate;
 
     /**
      * Код клиента
@@ -126,7 +127,7 @@ public class QuikDeal extends QuikStandardDataObject {
      * Доход (%) на дату выкупа
      */
     @JsonProperty(value = "accrued2")
-    private double accrued2;
+    private BigDecimal accrued2;
 
     /**
      * Срок РЕПО, в календарных днях
@@ -138,55 +139,55 @@ public class QuikDeal extends QuikStandardDataObject {
      * Сумма РЕПО на текущую дату. Отображается с точностью 2 знака
      */
     @JsonProperty(value = "repovalue")
-    private double repoValue;
+    private BigDecimal repoValue;
 
     /**
      * Объём сделки выкупа РЕПО. Отображается с точностью 2 знака
      */
     @JsonProperty(value = "repo2value")
-    private double repo2Value;
+    private BigDecimal repo2Value;
 
     /**
      * Начальный дисконт (%)
      */
     @JsonProperty(value = "start_discount")
-    private double startDiscount;
+    private BigDecimal startDiscount;
 
     /**
      * Нижний дисконт (%)
      */
     @JsonProperty(value = "lower_discount")
-    private double lowerDiscount;
+    private BigDecimal lowerDiscount;
 
     /**
      * Верхний дисконт (%)
      */
     @JsonProperty(value = "upper_discount")
-    private double upperDiscount;
+    private BigDecimal upperDiscount;
 
     /**
      * Блокировка обеспечения («Да»/«Нет»)
      */
     @JsonProperty(value = "block_securities")
-    private double blockSecurities;
+    private BigDecimal blockSecurities;
 
     /**
      * Клиринговая комиссия (ММВБ)
      */
     @JsonProperty(value = "clearing_comission")
-    private double clearingComission;
+    private BigDecimal clearingComission;
 
     /**
      * Комиссия Фондовой биржи (ММВБ)
      */
     @JsonProperty(value = "exchange_comission")
-    private double exchangeComission;
+    private BigDecimal exchangeComission;
 
     /**
      * Комиссия Технического центра (ММВБ)
      */
     @JsonProperty(value = "tech_center_comission")
-    private double techCenterComission;
+    private BigDecimal techCenterComission;
 
     /**
      * Дата расчетов
@@ -246,7 +247,7 @@ public class QuikDeal extends QuikStandardDataObject {
      * Комиссия брокера. Отображается с точностью до 2 двух знаков. Поле зарезервировано для будущего использования
      */
     @JsonProperty(value = "broker_comission")
-    private double brokerComission;
+    private BigDecimal brokerComission;
 
     /**
      * Номер витринной сделки в Торговой Системе для сделок РЕПО с ЦК и SWAP

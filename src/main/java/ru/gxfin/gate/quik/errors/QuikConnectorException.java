@@ -1,6 +1,6 @@
-package ru.gagarkin.gxfin.gate.quik.errors;
+package ru.gxfin.gate.quik.errors;
 
-import ru.gagarkin.gxfin.gate.quik.api.QuikNamedPipeMessenger;
+import ru.gxfin.gate.quik.api.QuikNamedPipeMessenger;
 
 /**
  * Сигнализирует об ошибках в логие работы QuikConnector-а

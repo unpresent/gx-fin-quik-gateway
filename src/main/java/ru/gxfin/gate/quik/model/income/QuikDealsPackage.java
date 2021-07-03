@@ -1,4 +1,4 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.income;
 
 public class QuikDealsPackage extends QuikStandardDataPackage<QuikDeal> {
 }

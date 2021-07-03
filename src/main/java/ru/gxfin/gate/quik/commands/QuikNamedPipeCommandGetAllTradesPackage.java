@@ -1,6 +1,6 @@
 package ru.gxfin.gate.quik.commands;
 
-import ru.gxfin.gate.quik.data.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.model.income.QuikAllTradesPackage;
 
 /**
  * Команда на получение пакета Обезличенных Сделок, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit

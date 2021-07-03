@@ -1,9 +1,9 @@
-package ru.gagarkin.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import ru.gagarkin.gxfin.common.data.AbstractDataPackage;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikStandardDataObject;
-import ru.gagarkin.gxfin.gate.quik.data.income.QuikStandardDataPackage;
+import ru.gxfin.common.data.AbstractDataPackage;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataPackage;
 
 import java.util.Collection;
 
@@ -32,8 +32,8 @@ public abstract class StandardDataPackage<T extends StandardDataObject> extends 
 
     public StandardDataPackage(QuikStandardDataPackage quikDataPackage) {
         super();
-        this.allCount = quikDataPackage.quikAllCount;
-        var n = quikDataPackage.size();
+        this.allCount = quikDataPackage.getQuikAllCount();
+        final var n = quikDataPackage.size();
         for (int i = 0; i < n; i++) {
             this.getListItems().add(createInstanceFromQuikSource((QuikStandardDataObject)quikDataPackage.get(i)));
         }

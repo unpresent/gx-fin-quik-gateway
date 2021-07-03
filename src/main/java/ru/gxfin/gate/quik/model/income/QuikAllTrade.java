@@ -1,4 +1,4 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -20,97 +20,97 @@ public class QuikAllTrade extends QuikStandardDataObject {
      * Номер сделки в торговой системе
      */
     @JsonProperty(value = "trade_num")
-    public String tradeNum;
+    private String tradeNum;
 
     /**
      * Набор битовых флагов
      */
     @JsonProperty(value = "flags")
-    public int flags;
+    private int flags;
 
     /**
      * Дата и время
      */
     @JsonProperty(value = "datetime")
-    public Date tradeDateTime;
+    private Date tradeDateTime;
 
     /**
      * Код биржи в торговой системе
      */
     @JsonProperty(value = "exchange_code")
-    public String exchangeCode;
+    private String exchangeCode;
 
     /**
      * Код класса
      */
     @JsonProperty(value = "class_code")
-    public String classCode;
+    private String classCode;
 
     /**
      * Код бумаги заявки
      */
     @JsonProperty(value = "sec_code")
-    public String secCode;
+    private String secCode;
 
     /**
      * Цена
      */
     @JsonProperty(value = "price")
-    public BigDecimal price;
+    private BigDecimal price;
 
     /**
      * Количество бумаг в последней сделке в лотах
      */
     @JsonProperty(value = "qty")
-    public BigDecimal quantity;
+    private BigDecimal quantity;
 
     /**
      * Объем в денежных средствах
      */
     @JsonProperty(value = "value")
-    public BigDecimal value;
+    private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
     @JsonProperty(value = "accruedint")
-    public BigDecimal accruedInterest;
+    private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
     @JsonProperty(value = "yield")
-    public BigDecimal yield;
+    private BigDecimal yield;
 
     /**
      * Код расчетов
      */
     @JsonProperty(value = "settlecode")
-    public String settleCode;
+    private String settleCode;
 
     /**
      * Ставка РЕПО (%)
      */
     @JsonProperty(value = "reporate")
-    public BigDecimal repoRate;
+    private BigDecimal repoRate;
 
     /**
      * Сумма РЕПО
      */
     @JsonProperty(value = "repovalue")
-    public BigDecimal repoValue;
+    private BigDecimal repoValue;
 
     /**
      * Объем выкупа РЕПО
      */
     @JsonProperty(value = "repo2value")
-    public BigDecimal repo2Value;
+    private BigDecimal repo2Value;
 
     /**
      * Срок РЕПО в днях
      */
     @JsonProperty(value = "repoterm")
-    public int repoTerm;
+    private int repoTerm;
 
     /**
      * Период торговой сессии. Возможные значения:
@@ -119,11 +119,11 @@ public class QuikAllTrade extends QuikStandardDataObject {
      * «2» – Закрытие
      */
     @JsonProperty(value = "period")
-    public short period;
+    private short period;
 
     /**
      * Открытый интерес
      */
     @JsonProperty(value = "open_interest")
-    public int openInterest;
+    private int openInterest;
 }

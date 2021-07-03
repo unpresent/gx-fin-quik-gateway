@@ -1,6 +1,6 @@
 package ru.gxfin.gate.quik.commands;
 
-import ru.gxfin.gate.quik.data.income.QuikSecuritiesPackage;
+import ru.gxfin.gate.quik.model.income.QuikSecuritiesPackage;
 
 /**
  * Команда на получение пакета ФИ, начиная с индекса fromIndex с ограничением размера пакета packetSizeLimit

@@ -4,9 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.gxfin.gate.quik.data.income.QuikAllTrade;
-import ru.gxfin.gate.quik.data.income.QuikAllTradesPackage;
-import ru.gxfin.gate.quik.data.internal.AllTradesPackage;
+import ru.gxfin.gate.quik.model.income.QuikAllTrade;
+import ru.gxfin.gate.quik.model.income.QuikAllTradesPackage;
+import ru.gxfin.gate.quik.model.internal.AllTradesPackage;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -87,7 +87,7 @@ public class TestConnectorParsers {
         QuikAllTrade testQuikAllTrade = objectMapper.readValue(testMessage,  QuikAllTrade.class);
 
         Assertions.assertEquals(1, testQuikAllTrade.getRowIndex(), "Ошибка Jackson-десериализации (row_index в rowIndex) json-строки в AllTrade");
-        Assertions.assertEquals("3518016102", testQuikAllTrade.tradeNum, "Ошибка Jackson-десериализации (trade_num в 3518016102) json-строки в AllTrade");
+        Assertions.assertEquals("3518016102", testQuikAllTrade.getTradeNum(), "Ошибка Jackson-десериализации (trade_num в 3518016102) json-строки в AllTrade");
     }
 
 

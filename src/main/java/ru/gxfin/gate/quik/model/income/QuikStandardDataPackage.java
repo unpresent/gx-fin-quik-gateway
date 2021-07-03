@@ -1,4 +1,4 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

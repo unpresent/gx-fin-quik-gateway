@@ -1,9 +1,11 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 /**
  * Инструмент
@@ -46,7 +48,7 @@ public class QuikSecurity extends QuikStandardDataObject {
      * Номинал
      */
     @JsonProperty(value = "face_value")
-    private Double faceValue;
+    private BigDecimal faceValue;
 
     /**
      * Валюта номинала
@@ -70,7 +72,7 @@ public class QuikSecurity extends QuikStandardDataObject {
      * Размер лота
      */
     @JsonProperty(value = "lot_size")
-    private double lotSize;
+    private BigDecimal lotSize;
 
     /**
      * ISIN
@@ -82,5 +84,5 @@ public class QuikSecurity extends QuikStandardDataObject {
      * Минимальный шаг цены
      */
     @JsonProperty(value = "min_price_step")
-    private double minPriceStep;
+    private BigDecimal minPriceStep;
 }

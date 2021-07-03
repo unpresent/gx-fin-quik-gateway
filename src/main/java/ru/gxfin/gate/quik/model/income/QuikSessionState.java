@@ -1,86 +1,68 @@
-package ru.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.income;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import ru.gxfin.common.data.AbstractDataObject;
-import ru.gxfin.gate.quik.data.income.QuikSessionState;
 
 import java.sql.Time;
 
 @Getter
 @Setter
 @EqualsAndHashCode
-public class SessionState extends AbstractDataObject {
+public class QuikSessionState extends AbstractDataObject {
     /**
      * Открыто ли соединение Quik с сервером
      */
-    @JsonProperty
+    @JsonProperty(value = "is_connected")
     private boolean isConnected;
 
     /**
      * Текущая сессия
      */
-    @JsonProperty
+    @JsonProperty(value = "session_id")
     private String sessionId;
 
     /**
      * Текущее время на сервере
      */
-    @JsonProperty
+    @JsonProperty(value = "server_time")
     private Time serverTime;
 
     /**
      * Время открытия соединения с Сервером
      */
-    @JsonProperty
+    @JsonProperty(value = "connection_time")
     private Time connectionTime;
 
     /**
      * Версия Quik-а
      */
-    @JsonProperty
+    @JsonProperty(value = "version")
     private String version;
 
     /**
      * Connection ?
      */
-    @JsonProperty
+    @JsonProperty(value = "connection")
     private String connection;
 
     /**
      * ip_address ?
      */
-    @JsonProperty
+    @JsonProperty(value = "ip_address")
     private String ipAddress;
 
     /**
      * ip_port ?
      */
-    @JsonProperty
+    @JsonProperty(value = "ip_port")
     private String ipPort;
 
     /**
      * ip_comment ?
      */
-    @JsonProperty
+    @JsonProperty(value = "ip_comment")
     private String ipComment;
-
-    public SessionState() {
-        super();
-    }
-
-    public SessionState(QuikSessionState sourceDataObject) {
-        super();
-        this.isConnected = sourceDataObject.isConnected();
-        this.sessionId = sourceDataObject.getSessionId();
-        this.serverTime = sourceDataObject.getServerTime();
-        this.connectionTime = sourceDataObject.getConnectionTime();
-        this.version = sourceDataObject.getVersion();
-        this.connection = sourceDataObject.getConnection();
-        this.ipAddress = sourceDataObject.getIpAddress();
-        this.ipPort = sourceDataObject.getIpPort();
-        this.ipComment = sourceDataObject.getIpComment();
-    }
 }

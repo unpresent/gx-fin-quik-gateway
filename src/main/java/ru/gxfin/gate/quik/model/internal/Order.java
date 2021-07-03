@@ -1,10 +1,15 @@
-package ru.gxfin.gate.quik.data.income;
+package ru.gxfin.gate.quik.model.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import ru.gxfin.common.utils.BigDecimalUtils;
+import ru.gxfin.common.utils.StringUtils;
+import ru.gxfin.gate.quik.model.income.QuikOrder;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -13,167 +18,167 @@ import java.util.Date;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class QuikOrder extends QuikStandardDataObject {
+public class Order extends StandardDataObject {
     /**
      * Номер заявки в торговой системе
      */
-    @JsonProperty(value = "order_num")
+    @JsonProperty
     private String orderNum;
 
     /**
      * Набор битовых флагов
      */
-    @JsonProperty(value = "flags")
+    @JsonProperty
     private int flags;
 
     /**
      * Комментарий, обычно: <код клиента>/<номер поручения>
      */
-    @JsonProperty(value = "brokerref")
+    @JsonProperty
     private String brokerRef;
 
     /**
      * Идентификатор трейдера
      */
-    @JsonProperty(value = "userid")
+    @JsonProperty
     private String userId;
 
     /**
      * Идентификатор фирмы
      */
-    @JsonProperty(value = "firmid")
+    @JsonProperty
     private String firmId;
 
     /**
      * Торговый счет
      */
-    @JsonProperty(value = "account")
+    @JsonProperty
     private String account;
 
     /**
      * Цена
      */
-    @JsonProperty(value = "price")
-    private double price;
+    @JsonProperty
+    private BigDecimal price;
 
     /**
      * Количество в лотах
      */
-    @JsonProperty(value = "qty")
-    private double quantity;
+    @JsonProperty
+    private BigDecimal quantity;
 
     /**
      * Остаток
      */
-    @JsonProperty(value = "balance")
-    private double balance;
+    @JsonProperty
+    private BigDecimal balance;
 
     /**
      * Объем в денежных средствах
      */
-    @JsonProperty(value = "value")
-    private double value;
+    @JsonProperty
+    private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
-    @JsonProperty(value = "accruedint")
-    private double accruedInterest;
+    @JsonProperty
+    private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
-    @JsonProperty(value = "yield")
-    private double yield;
+    @JsonProperty
+    private BigDecimal yield;
 
     /**
      * Идентификатор транзакции
      */
-    @JsonProperty(value = "trans_id")
+    @JsonProperty
     private long transactionId;
 
     /**
      * Код клиента
      */
-    @JsonProperty(value = "client_code")
+    @JsonProperty
     private String clientCode;
 
     /**
      * Цена выкупа
      */
-    @JsonProperty(value = "price2")
-    private double price2;
+    @JsonProperty
+    private BigDecimal price2;
 
     /**
      * Код расчетов
      */
-    @JsonProperty(value = "settlecode")
+    @JsonProperty
     private String settleCode;
 
     /**
      * Идентификатор пользователя
      */
-    @JsonProperty(value = "uid")
+    @JsonProperty
     private long uid;
 
     /**
      * Идентификатор пользователя, снявшего заявку
      */
-    @JsonProperty(value = "canceled_uid")
+    @JsonProperty
     private long canceledUid;
 
     /**
      * Код биржи в торговой системе
      */
-    @JsonProperty(value = "exchange_code")
+    @JsonProperty
     private String exchangeCode;
 
     /**
      * Время активации
      */
-    @JsonProperty(value = "activation_time")
-    private Date activation_time;
+    @JsonProperty("activation_time")
+    private Date activationTime;
 
     /**
      * Номер заявки в торговой системе
      */
-    @JsonProperty(value = "linkedorder")
+    @JsonProperty
     private long linkedOrder;
 
     /**
      * Дата окончания срока действия заявки
      */
-    @JsonProperty(value = "expiry")
+    @JsonProperty
     private long expiry;
 
     /**
      * Код бумаги заявки
      */
-    @JsonProperty(value = "sec_code")
+    @JsonProperty
     private String secCode;
 
     /**
      * Код класса заявки
      */
-    @JsonProperty(value = "class_code")
+    @JsonProperty
     private String classCode;
 
     /**
      * Дата и время
      */
-    @JsonProperty(value = "datetime")
+    @JsonProperty
     private Date tradeDateTime;
 
     /**
      * Дата и время снятия заявки
      */
-    @JsonProperty(value = "withdraw_datetime")
+    @JsonProperty
     private Date withdrawDateTime;
 
     /**
      * Идентификатор расчетного счета/кода в клиринговой организации
      */
-    @JsonProperty(value = "bank_acc_id")
+    @JsonProperty
     private String bankAccountId;
 
     /**
@@ -181,26 +186,26 @@ public class QuikOrder extends QuikStandardDataObject {
      * «0» – по количеству,
      * «1» – по объему
      */
-    @JsonProperty(value = "value_entry_type")
+    @JsonProperty
     private byte valueEntryType;
 
     /**
      * Срок РЕПО, в календарных днях
      */
-    @JsonProperty(value = "repoterm")
+    @JsonProperty
     private int repoTerm;
 
     /**
      * Сумма РЕПО на текущую дату. Отображается с точностью 2 знака
      */
-    @JsonProperty(value = "repovalue")
-    private double repoValue;
+    @JsonProperty
+    private BigDecimal repoValue;
 
     /**
      * Объём сделки выкупа РЕПО. Отображается с точностью 2 знака
      */
-    @JsonProperty(value = "repo2value")
-    private double repo2Value;
+    @JsonProperty
+    private BigDecimal repo2Value;
 
     /**
      * Остаток суммы РЕПО за вычетом суммы привлеченных
@@ -208,67 +213,118 @@ public class QuikOrder extends QuikStandardDataObject {
      * по состоянию на текущую дату.
      * Отображается с точностью 2 знака
      */
-    @JsonProperty(value = "repo_value_balance")
-    private double repoValueBalance;
+    @JsonProperty
+    private BigDecimal repoValueBalance;
 
     /**
      * Начальный дисконт, в %
      */
-    @JsonProperty(value = "start_discount")
-    private double startDiscount;
+    @JsonProperty
+    private BigDecimal startDiscount;
 
     /**
      * Причина отклонения заявки брокером
      */
-    @JsonProperty(value = "reject_reason")
+    @JsonProperty
     private String rejectRreason;
 
     /**
      * Битовое поле для получения специфических параметров с западных площадок
      */
-    @JsonProperty(value = "ext_order_flags")
+    @JsonProperty
     private int extOrderFlags;
 
     /**
      * Минимально допустимое количество, которое можно указать в заявке по данному инструменту.
      * Если имеет значение «0», значит ограничение по количеству не задано
      */
-    @JsonProperty(value = "min_qty")
-    private double minQuantity;
+    @JsonProperty
+    private BigDecimal minQuantity;
 
     /**
      * Тип исполнения заявки. Если имеет значение «0», значит значение не задано
      */
-    @JsonProperty(value = "exec_type")
+    @JsonProperty
     private int execType;
 
     /**
      * Поле для получения параметров по западным площадкам. Если имеет значение «0», значит значение не задано
      */
-    @JsonProperty(value = "side_qualifier")
+    @JsonProperty
     private int sideQualifier;
 
     /**
      * Поле для получения параметров по западным площадкам. Если имеет значение «0», значит значение не задано
      */
-    @JsonProperty(value = "acnt_type")
+    @JsonProperty
     private int accountType;
 
     /**
      * Поле для получения параметров по западным площадкам. Если имеет значение «0», значит значение не задано
      */
-    @JsonProperty(value = "capacity")
-    private double capacity;
+    @JsonProperty
+    private BigDecimal capacity;
 
     /**
      * Поле для получения параметров по западным площадкам. Если имеет значение «0», значит значение не задано
      */
-    @JsonProperty(value = "passive_only_order")
+    @JsonProperty
     private byte passiveOnlyOrder;
 
     /**
      * Видимое количество. Параметр айсберг-заявок, для обычных заявок выводится значение: «0»
      */
-    @JsonProperty(value = "visible")
-    private double visible;
+    @JsonProperty
+    private BigDecimal visible;
+
+    public Order() {
+        super();
+    }
+
+    public Order(QuikStandardDataObject quikDataObject) {
+        super(quikDataObject);
+        final var sourceDataObject = (QuikOrder) quikDataObject;
+        this.orderNum = sourceDataObject.getOrderNum();
+        this.flags = sourceDataObject.getFlags();
+        this.brokerRef = StringUtils.nullIf(sourceDataObject.getBrokerRef(), "");
+        this.userId = StringUtils.nullIf(sourceDataObject.getUserId(), "");
+        this.firmId = StringUtils.nullIf(sourceDataObject.getFirmId(), "");
+        this.account = StringUtils.nullIf(sourceDataObject.getAccount(), "");
+        this.price = sourceDataObject.getPrice();
+        this.quantity = sourceDataObject.getQuantity();
+        this.balance = BigDecimalUtils.nullIf(sourceDataObject.getBalance(), BigDecimal.ZERO);;
+        this.value = sourceDataObject.getValue();
+        this.accruedInterest = BigDecimalUtils.nullIf(sourceDataObject.getAccruedInterest(), BigDecimal.ZERO);
+        this.yield = BigDecimalUtils.nullIf(sourceDataObject.getYield(), BigDecimal.ZERO);
+        this.transactionId = sourceDataObject.getTransactionId();
+        this.clientCode = StringUtils.nullIf(sourceDataObject.getClientCode(), "");
+        this.price2 = BigDecimalUtils.nullIf(sourceDataObject.getPrice2(), BigDecimal.ZERO);
+        this.settleCode = sourceDataObject.getSettleCode();
+        this.uid = sourceDataObject.getUid();
+        this.canceledUid = sourceDataObject.getCanceledUid();
+        this.exchangeCode = sourceDataObject.getExchangeCode();
+        this.activationTime = sourceDataObject.getActivationTime();
+        this.linkedOrder = sourceDataObject.getLinkedOrder();
+        this.expiry = sourceDataObject.getExpiry();
+        this.secCode = sourceDataObject.getSecCode();
+        this.classCode = sourceDataObject.getClassCode();
+        this.tradeDateTime = sourceDataObject.getTradeDateTime();
+        this.withdrawDateTime = sourceDataObject.getWithdrawDateTime();
+        this.bankAccountId = StringUtils.nullIf(sourceDataObject.getBankAccountId(), "");
+        this.valueEntryType = sourceDataObject.getValueEntryType();
+        this.repoTerm = sourceDataObject.getRepoTerm();
+        this.repoValue = BigDecimalUtils.nullIf(sourceDataObject.getRepoValue(), BigDecimal.ZERO);
+        this.repo2Value = BigDecimalUtils.nullIf(sourceDataObject.getRepo2Value(), BigDecimal.ZERO);
+        this.repoValueBalance = BigDecimalUtils.nullIf(sourceDataObject.getRepoValueBalance(), BigDecimal.ZERO);
+        this.startDiscount = BigDecimalUtils.nullIf(sourceDataObject.getStartDiscount(), BigDecimal.ZERO);
+        this.rejectRreason = StringUtils.nullIf(sourceDataObject.getRejectRreason(), "");
+        this.extOrderFlags = sourceDataObject.getExtOrderFlags();
+        this.minQuantity = BigDecimalUtils.nullIf(sourceDataObject.getMinQuantity(), BigDecimal.ZERO);
+        this.execType = sourceDataObject.getExecType();
+        this.sideQualifier = sourceDataObject.getSideQualifier();
+        this.accountType = sourceDataObject.getAccountType();
+        this.capacity = BigDecimalUtils.nullIf(sourceDataObject.getCapacity(), BigDecimal.ZERO);
+        this.passiveOnlyOrder = sourceDataObject.getPassiveOnlyOrder();
+        this.visible = sourceDataObject.getVisible();
+    }
 }

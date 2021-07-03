@@ -1,12 +1,15 @@
-package ru.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import ru.gxfin.gate.quik.data.income.QuikDeal;
-import ru.gxfin.gate.quik.data.income.QuikStandardDataObject;
+import ru.gxfin.common.utils.BigDecimalUtils;
+import ru.gxfin.common.utils.StringUtils;
+import ru.gxfin.gate.quik.model.income.QuikDeal;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -62,31 +65,31 @@ public class Deal extends StandardDataObject {
      * Цена
      */
     @JsonProperty
-    private double price;
+    private BigDecimal price;
 
     /**
      * Количество в лотах
      */
     @JsonProperty
-    private double quantity;
+    private BigDecimal quantity;
 
     /**
      * Объем в денежных средствах
      */
     @JsonProperty
-    private double value;
+    private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
     @JsonProperty
-    private double accruedInterest;
+    private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
     @JsonProperty
-    private double yield;
+    private BigDecimal yield;
 
     /**
      * Код расчетов
@@ -110,13 +113,13 @@ public class Deal extends StandardDataObject {
      * Цена выкупа
      */
     @JsonProperty
-    private double price2;
+    private BigDecimal price2;
 
     /**
      * Ставка РЕПО (%)
      */
     @JsonProperty
-    private double repoRate;
+    private BigDecimal repoRate;
 
     /**
      * Код клиента
@@ -128,7 +131,7 @@ public class Deal extends StandardDataObject {
      * Доход (%) на дату выкупа
      */
     @JsonProperty
-    private double accrued2;
+    private BigDecimal accrued2;
 
     /**
      * Срок РЕПО, в календарных днях
@@ -140,55 +143,55 @@ public class Deal extends StandardDataObject {
      * Сумма РЕПО на текущую дату. Отображается с точностью 2 знака
      */
     @JsonProperty
-    private double repoValue;
+    private BigDecimal repoValue;
 
     /**
      * Объём сделки выкупа РЕПО. Отображается с точностью 2 знака
      */
     @JsonProperty
-    private double repo2Value;
+    private BigDecimal repo2Value;
 
     /**
      * Начальный дисконт (%)
      */
     @JsonProperty
-    private double startDiscount;
+    private BigDecimal startDiscount;
 
     /**
      * Нижний дисконт (%)
      */
     @JsonProperty
-    private double lowerDiscount;
+    private BigDecimal lowerDiscount;
 
     /**
      * Верхний дисконт (%)
      */
     @JsonProperty
-    private double upperDiscount;
+    private BigDecimal upperDiscount;
 
     /**
      * Блокировка обеспечения («Да»/«Нет»)
      */
     @JsonProperty
-    private double blockSecurities;
+    private BigDecimal blockSecurities;
 
     /**
      * Клиринговая комиссия (ММВБ)
      */
     @JsonProperty
-    private double clearingComission;
+    private BigDecimal clearingComission;
 
     /**
      * Комиссия Фондовой биржи (ММВБ)
      */
     @JsonProperty
-    private double exchangeComission;
+    private BigDecimal exchangeComission;
 
     /**
      * Комиссия Технического центра (ММВБ)
      */
     @JsonProperty
-    private double techCenterComission;
+    private BigDecimal techCenterComission;
 
     /**
      * Дата расчетов
@@ -248,7 +251,7 @@ public class Deal extends StandardDataObject {
      * Комиссия брокера. Отображается с точностью до 2 двух знаков. Поле зарезервировано для будущего использования
      */
     @JsonProperty
-    private double brokerComission;
+    private BigDecimal brokerComission;
 
     /**
      * Номер витринной сделки в Торговой Системе для сделок РЕПО с ЦК и SWAP
@@ -343,29 +346,29 @@ public class Deal extends StandardDataObject {
         this.userId = sourceDataObject.getUserId();
         this.firmId = sourceDataObject.getFirmId();
         this.canceledUid = sourceDataObject.getCanceledUid();
-        this.account = sourceDataObject.getAccount();
+        this.account = StringUtils.nullIf(sourceDataObject.getAccount(), "");
         this.price = sourceDataObject.getPrice();
         this.quantity = sourceDataObject.getQuantity();
         this.value = sourceDataObject.getValue();
-        this.accruedInterest = sourceDataObject.getAccruedInterest();
-        this.yield = sourceDataObject.getYield();
-        this.settleCode = sourceDataObject.getSettleCode();
-        this.cpFirmId = sourceDataObject.getCpFirmId();
+        this.accruedInterest = BigDecimalUtils.nullIf(sourceDataObject.getAccruedInterest(), BigDecimal.ZERO);
+        this.yield = BigDecimalUtils.nullIf(sourceDataObject.getYield(), BigDecimal.ZERO);
+        this.settleCode = StringUtils.nullIf(sourceDataObject.getSettleCode(), "");
+        this.cpFirmId = StringUtils.nullIf(sourceDataObject.getCpFirmId(), "");
         this.flags = sourceDataObject.getFlags();
-        this.price2 = sourceDataObject.getPrice2();
-        this.repoRate = sourceDataObject.getRepoRate();
-        this.clientCode = sourceDataObject.getClientCode();
-        this.accrued2 = sourceDataObject.getAccrued2();
+        this.price2 = BigDecimalUtils.nullIf(sourceDataObject.getPrice2(), BigDecimal.ZERO);
+        this.repoRate = BigDecimalUtils.nullIf(sourceDataObject.getRepoRate(), BigDecimal.ZERO);
+        this.clientCode = StringUtils.nullIf(sourceDataObject.getClientCode(), "");
+        this.accrued2 = BigDecimalUtils.nullIf(sourceDataObject.getAccrued2(), BigDecimal.ZERO);
         this.repoTerm = sourceDataObject.getRepoTerm();
-        this.repoValue = sourceDataObject.getRepoValue();
-        this.repo2Value = sourceDataObject.getRepo2Value();
-        this.startDiscount = sourceDataObject.getStartDiscount();
-        this.lowerDiscount = sourceDataObject.getLowerDiscount();
-        this.upperDiscount = sourceDataObject.getUpperDiscount();
+        this.repoValue = BigDecimalUtils.nullIf(sourceDataObject.getRepoValue(), BigDecimal.ZERO);
+        this.repo2Value = BigDecimalUtils.nullIf(sourceDataObject.getRepo2Value(), BigDecimal.ZERO);
+        this.startDiscount = BigDecimalUtils.nullIf(sourceDataObject.getStartDiscount(), BigDecimal.ZERO);
+        this.lowerDiscount = BigDecimalUtils.nullIf(sourceDataObject.getLowerDiscount(), BigDecimal.ZERO);
+        this.upperDiscount = BigDecimalUtils.nullIf(sourceDataObject.getUpperDiscount(), BigDecimal.ZERO);
         this.blockSecurities = sourceDataObject.getBlockSecurities();
-        this.clearingComission = sourceDataObject.getClearingComission();
-        this.exchangeComission = sourceDataObject.getExchangeComission();
-        this.techCenterComission = sourceDataObject.getTechCenterComission();
+        this.clearingComission = BigDecimalUtils.nullIf(sourceDataObject.getClearingComission(), BigDecimal.ZERO);
+        this.exchangeComission = BigDecimalUtils.nullIf(sourceDataObject.getExchangeComission(), BigDecimal.ZERO);
+        this.techCenterComission = BigDecimalUtils.nullIf(sourceDataObject.getTechCenterComission(), BigDecimal.ZERO);;
         this.settleDate = sourceDataObject.getSettleDate();
         this.settleCurrency = sourceDataObject.getSettleCurrency();
         this.tradeCurrency = sourceDataObject.getTradeCurrency();
@@ -380,10 +383,10 @@ public class Deal extends StandardDataObject {
         this.period = sourceDataObject.getPeriod();
         this.transactionId = sourceDataObject.getTransactionId();
         this.kind = sourceDataObject.getKind();
-        this.clearingBankAccountId = sourceDataObject.getClearingBankAccountId();
+        this.clearingBankAccountId = StringUtils.nullIf(sourceDataObject.getClearingBankAccountId(), "");
         this.canceledDateTime = sourceDataObject.getCanceledDateTime();
-        this.clearingFirmId = sourceDataObject.getClearingFirmId();
-        this.systemRef = sourceDataObject.getSystemRef();
+        this.clearingFirmId = StringUtils.nullIf(sourceDataObject.getClearingFirmId(), "");
+        this.systemRef = StringUtils.nullIf(sourceDataObject.getSystemRef(), "");
         this.uid = sourceDataObject.getUid();
     }
 }

@@ -2,8 +2,7 @@ package ru.gxfin.gate.quik;
 
 import lombok.extern.slf4j.Slf4j;
 import ru.gxfin.gate.quik.connector.QuikConnector;
-import ru.gxfin.gate.quik.data.internal.*;
-import ru.gxfin.gate.quik.data.internal.Security;
+import ru.gxfin.gate.quik.model.internal.Security;
 
 @Slf4j
 // @SpringBootApplication

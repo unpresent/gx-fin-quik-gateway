@@ -1,12 +1,14 @@
-package ru.gxfin.gate.quik.data.internal;
+package ru.gxfin.gate.quik.model.internal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.gxfin.gate.quik.data.income.QuikAllTrade;
-import ru.gxfin.gate.quik.data.income.QuikStandardDataObject;
+import ru.gxfin.common.utils.BigDecimalUtils;
+import ru.gxfin.common.utils.StringUtils;
+import ru.gxfin.gate.quik.model.income.QuikAllTrade;
+import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -139,26 +141,26 @@ public class AllTrade extends StandardDataObject {
     public AllTrade(QuikStandardDataObject quikDataObject) {
         super(quikDataObject);
         final var sourceDataObject = (QuikAllTrade) quikDataObject;
-        this.tradeNum = sourceDataObject.tradeNum;
-        this.flags = sourceDataObject.flags;
-        this.tradeDateTime = sourceDataObject.tradeDateTime
+        this.tradeNum = sourceDataObject.getTradeNum();
+        this.flags = sourceDataObject.getFlags();
+        this.tradeDateTime = sourceDataObject.getTradeDateTime()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
-        this.exchangeCode = sourceDataObject.exchangeCode;
-        this.classCode = sourceDataObject.classCode;
-        this.secCode = sourceDataObject.secCode;
-        this.price = sourceDataObject.price;
-        this.quantity = sourceDataObject.quantity;
-        this.value = sourceDataObject.value;
-        this.accruedInterest = sourceDataObject.accruedInterest;
-        this.yield = sourceDataObject.yield;
-        this.settleCode = sourceDataObject.settleCode;
-        this.repoRate = sourceDataObject.repoRate;
-        this.repoValue = sourceDataObject.repoValue;
-        this.repo2Value = sourceDataObject.repo2Value;
-        this.repoTerm = sourceDataObject.repoTerm;
-        this.period = sourceDataObject.period;
-        this.openInterest = sourceDataObject.openInterest;
+        this.exchangeCode = sourceDataObject.getExchangeCode();
+        this.classCode = StringUtils.nullIf(sourceDataObject.getClassCode(), "");
+        this.secCode = StringUtils.nullIf(sourceDataObject.getSecCode(), "");
+        this.price = sourceDataObject.getPrice();
+        this.quantity = sourceDataObject.getQuantity();
+        this.value = sourceDataObject.getValue();
+        this.accruedInterest = BigDecimalUtils.nullIf(sourceDataObject.getAccruedInterest(), BigDecimal.ZERO);
+        this.yield = BigDecimalUtils.nullIf(sourceDataObject.getYield(), BigDecimal.ZERO);
+        this.settleCode = StringUtils.nullIf(sourceDataObject.getSettleCode(), "");
+        this.repoRate = BigDecimalUtils.nullIf(sourceDataObject.getRepoRate(), BigDecimal.ZERO);
+        this.repoValue = BigDecimalUtils.nullIf(sourceDataObject.getRepoValue(), BigDecimal.ZERO);
+        this.repo2Value = BigDecimalUtils.nullIf(sourceDataObject.getRepo2Value(), BigDecimal.ZERO);
+        this.repoTerm = sourceDataObject.getRepoTerm();
+        this.period = sourceDataObject.getPeriod();
+        this.openInterest = sourceDataObject.getOpenInterest();
     }
 }
