@@ -14,7 +14,7 @@ public class QuikNamedPipeCommandGetDealsPackage extends QuikNamedPipeCommandSta
     }
 
     @Override
-    public Class resultClass() {
+    public Class<?> resultClass() {
         return QuikDealsPackage.class;
     }
 }

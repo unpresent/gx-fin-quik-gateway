@@ -5,8 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import ru.gxfin.gate.quik.api.ConnectorState;
 import ru.gxfin.gate.quik.api.QuikConnectionApi;
-import ru.gxfin.gate.quik.errors.QuikConnectorException;
 import ru.gxfin.gate.quik.api.QuikNamedPipeMessenger;
+import ru.gxfin.gate.quik.errors.QuikConnectorException;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +34,6 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     private static final String PIPE_ACCESS_MODE = "rw";
 
     private static final String ERROR_ANSWER_BEGINS = "ERROR";
-
-    /**
-     * Размер для буфера входящих сообщений.
-     */
-    private final int inBufferSize;
 
     /**
      * Определяет имя pipe-а, с которым установлено текущее соединение.
@@ -81,12 +76,16 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
      */
     private RandomAccessFile currentPipe;
 
+    /**
+     * Конструктор контроллера.
+     * @param pipeName Корень имени pipe-а, через который будет осуществляться обмен данными с Quik-ом.
+     * @param inBufferSize Размер буфера под входящие сообщения.
+     */
     public QuikNamedPipeController(String pipeName, int inBufferSize) {
         log.debug("is creating; pipeName = {}, inBufferSize = {}", pipeName, inBufferSize);
 
         this.state = ConnectorState.Disconnected;
-        this.inBufferSize = inBufferSize;
-        this.inBuffer = new byte[this.inBufferSize];
+        this.inBuffer = new byte[inBufferSize];
         this.init(pipeName);
     }
 
@@ -110,7 +109,6 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     /**
      * Открытие NamedPipe-а.
      * После открытия NamedPipe-а переходим в состояние ожидания.
-     *
      * @throws IOException
      * @throws QuikConnectorException
      */

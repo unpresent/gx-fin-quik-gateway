@@ -113,6 +113,7 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     protected <P extends QuikStandardDataPackage> P getStandardPackage
             (QuikNamedPipeCommandStandardGet getCommand, long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
         synchronized (this) {
@@ -125,6 +126,7 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
             this.pipeController.sendMessage(commandMessage);
 
             String receivedMessage = this.pipeController.receiveMessage();
+            @SuppressWarnings("unchecked")
             Class<P> packageType = getCommand.resultClass();
             P result = this.objectMapper.readValue(receivedMessage, packageType);
 
@@ -140,26 +142,22 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
 
     @Override
     public QuikAllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        QuikAllTradesPackage result = getStandardPackage(this.commandGetAllTradesPackage, fromRowIndex, packageSizeLimit);
-        return result;
+        return getStandardPackage(this.commandGetAllTradesPackage, fromRowIndex, packageSizeLimit);
     }
 
     @Override
     public QuikOrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        QuikOrdersPackage result = getStandardPackage(this.commandGetOrdersPackage, fromRowIndex, packageSizeLimit);
-        return result;
+        return getStandardPackage(this.commandGetOrdersPackage, fromRowIndex, packageSizeLimit);
     }
 
     @Override
     public QuikDealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        QuikDealsPackage result = getStandardPackage(this.commandGetDealsPackage, fromRowIndex, packageSizeLimit);
-        return result;
+        return getStandardPackage(this.commandGetDealsPackage, fromRowIndex, packageSizeLimit);
     }
 
     @Override
     public QuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException {
-        QuikSecuritiesPackage result = getStandardPackage(this.commandGetSecuritiesPackage, fromRowIndex, packageSizeLimit);
-        return result;
+        return getStandardPackage(this.commandGetSecuritiesPackage, fromRowIndex, packageSizeLimit);
     }
 
     @Override

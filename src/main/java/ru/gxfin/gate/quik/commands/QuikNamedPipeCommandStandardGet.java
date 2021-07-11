@@ -7,6 +7,7 @@ public abstract class QuikNamedPipeCommandStandardGet extends AbstractQuikNamedP
     // public static final String PARAM_NAME_PACKET_SIZE_LIMIT = "PackageSizeLimit";
     private int packetSizeLimit;
 
+    @SuppressWarnings("UnusedReturnValue")
     public QuikNamedPipeCommandStandardGet Reset(long fromIndex, int packetSizeLimit) {
         this.fromIndex = fromIndex;
         this.packetSizeLimit = packetSizeLimit;
@@ -20,8 +21,9 @@ public abstract class QuikNamedPipeCommandStandardGet extends AbstractQuikNamedP
 
     @Override
     public String getCommandParams() {
-        return ((Long)fromIndex).toString() + ":" + ((Integer)packetSizeLimit).toString();
+        return fromIndex + ":" + packetSizeLimit;
     }
 
+    @SuppressWarnings("rawtypes")
     public abstract Class resultClass();
 }

@@ -30,10 +30,10 @@ public class AllTrade extends StandardDataObject {
     private String tradeNum;
 
     /**
-     * Набор битовых флагов
+     * Направление сделки (Покупка / Продажа)
      */
     @JsonProperty
-    private int flags;
+    private DealDirection direction;
 
     /**
      * Дата и время
@@ -142,7 +142,7 @@ public class AllTrade extends StandardDataObject {
         super(quikDataObject);
         final var sourceDataObject = (QuikAllTrade) quikDataObject;
         this.tradeNum = sourceDataObject.getTradeNum();
-        this.flags = sourceDataObject.getFlags();
+        this.direction = sourceDataObject.getFlags() == 0 ? DealDirection.S : DealDirection.B;
         this.tradeDateTime = sourceDataObject.getTradeDateTime()
                 .toInstant()
                 .atZone(ZoneId.systemDefault())

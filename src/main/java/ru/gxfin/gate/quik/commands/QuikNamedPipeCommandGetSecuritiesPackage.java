@@ -14,7 +14,7 @@ public class QuikNamedPipeCommandGetSecuritiesPackage extends QuikNamedPipeComma
     }
 
     @Override
-    public Class resultClass() {
+    public Class<?> resultClass() {
         return QuikSecuritiesPackage.class;
     }
 }

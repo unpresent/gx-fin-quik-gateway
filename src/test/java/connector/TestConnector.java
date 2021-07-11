@@ -2,6 +2,7 @@ package connector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.annotation.Testable;
 import ru.gxfin.gate.quik.connector.QuikConnector;
 import ru.gxfin.gate.quik.errors.QuikConnectorException;
 import ru.gxfin.gate.quik.model.income.QuikAllTradesPackage;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
 public class TestConnector {
     private QuikConnector connector;
 
-    @Test
+    // @Test
     public void TestConnectorRun() throws IOException, QuikConnectorException, InterruptedException {
         final int packageSizeLimit = 20;
         final int bufferSize = 32 * 1024;

@@ -14,7 +14,7 @@ public class QuikNamedPipeCommandGetAllTradesPackage extends QuikNamedPipeComman
     }
 
     @Override
-    public Class resultClass() {
+    public Class<?> resultClass() {
         return QuikAllTradesPackage.class;
     }
 }

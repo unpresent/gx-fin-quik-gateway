@@ -15,7 +15,7 @@ public class QuikNamedPipeCommandGetOrdersPackage extends QuikNamedPipeCommandSt
 
 
     @Override
-    public Class resultClass() {
+    public Class<?> resultClass() {
         return QuikOrdersPackage.class;
     }
 }
