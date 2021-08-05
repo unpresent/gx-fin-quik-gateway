@@ -1,6 +1,6 @@
 package ru.gxfin.gate.quik.api;
 
-import ru.gxfin.gate.quik.model.income.*;
+import ru.gxfin.gate.quik.model.original.*;
 import ru.gxfin.gate.quik.errors.QuikConnectorException;
 
 import java.io.IOException;
@@ -16,46 +16,46 @@ public interface QuikGetApi {
      * @param fromRowIndex индекс записи в таблице AllTrades, начиная с которого требуется получить пачку
      * @param packageSizeLimit определяет максимально допустимое количество записей в пакете
      * @return набор DTO AllTrade
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
-    QuikAllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    OriginalQuikAllTradesPackage getAllTradesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет поручений
      * @param fromRowIndex индекс записи в таблице Orders, начиная с которого требуется получить пачку
      * @param packageSizeLimit определяет максимально допустимое количество записей в пакете
      * @return набор DTO Order
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
-    QuikOrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    OriginalQuikOrdersPackage getOrdersPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет сделок
      * @param fromRowIndex индекс записи в таблице Deals, начиная с которого требуется получить пачку
      * @param packageSizeLimit определяет максимально допустимое количество записей в пакете
      * @return набор DTO Deal
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
-    QuikDealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    OriginalQuikDealsPackage getDealsPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить пакет сделок
      * @param fromRowIndex индекс записи в таблице Securities, начиная с которого требуется получить пачку
      * @param packageSizeLimit определяет максимально допустимое количество записей в пакете
      * @return набор DTO Security
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
-    QuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
+    OriginalQuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
      * Получить состяние сессии Quik-а
      * @return DTO SessionState
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
-    QuikSessionState getSessionState() throws QuikConnectorException, IOException;
+    OriginalQuikSessionState getSessionState() throws QuikConnectorException, IOException;
 }

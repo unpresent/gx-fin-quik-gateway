@@ -1,15 +1,14 @@
-package ru.gxfin.gate.quik.model.internal;
+package ru.gxfin.gate.quik.model.original;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import ru.gxfin.common.utils.BigDecimalUtils;
-import ru.gxfin.common.utils.StringUtils;
-import ru.gxfin.gate.quik.model.income.QuikDeal;
-import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -17,246 +16,248 @@ import java.util.Date;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class Deal extends StandardDataObject {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class OriginalQuikDeal extends OriginalQuikStandardDataObject {
     /**
      * Номер сделки в торговой системе
      */
-    @JsonProperty
+    @JsonProperty(value = "trade_num")
     private String tradeNum;
 
     /**
      * Номер заявки в торговой системе
      */
-    @JsonProperty
+    @JsonProperty(value = "order_num")
     private String orderNum;
 
     /**
      * Комментарий, обычно: <код клиента>/<номер поручения>
      */
-    @JsonProperty
+    @JsonProperty(value = "brokerref")
     private String brokerRef;
 
     /**
      * Идентификатор трейдера
      */
-    @JsonProperty
+    @JsonProperty(value = "userid")
     private String userId;
 
     /**
      * Идентификатор фирмы
      */
-    @JsonProperty
+    @JsonProperty(value = "firmid")
     private String firmId;
 
     /**
      * Идентификатор пользователя, снявшего заявку
      */
-    @JsonProperty
+    @JsonProperty(value = "canceled_uid")
     private long canceledUid;
 
     /**
      * Торговый счет
      */
-    @JsonProperty
+    @JsonProperty(value = "account")
     private String account;
 
     /**
      * Цена
      */
-    @JsonProperty
+    @JsonProperty(value = "price")
     private BigDecimal price;
 
     /**
      * Количество в лотах
      */
-    @JsonProperty
+    @JsonProperty(value = "qty")
     private BigDecimal quantity;
 
     /**
      * Объем в денежных средствах
      */
-    @JsonProperty
+    @JsonProperty(value = "value")
     private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
-    @JsonProperty
+    @JsonProperty(value = "accruedint")
     private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
-    @JsonProperty
+    @JsonProperty(value = "yield")
     private BigDecimal yield;
 
     /**
      * Код расчетов
      */
-    @JsonProperty
+    @JsonProperty(value = "settlecode")
     private String settleCode;
 
     /**
      * Код фирмы партнера
      */
-    @JsonProperty
+    @JsonProperty(value = "cpfirmid")
     private String cpFirmId;
 
     /**
      * Набор битовых флагов
      */
-    @JsonProperty
+    @JsonProperty(value = "flags")
     private int flags;
 
     /**
      * Цена выкупа
      */
-    @JsonProperty
+    @JsonProperty(value = "price2")
     private BigDecimal price2;
 
     /**
      * Ставка РЕПО (%)
      */
-    @JsonProperty
+    @JsonProperty(value = "reporate")
     private BigDecimal repoRate;
 
     /**
      * Код клиента
      */
-    @JsonProperty
+    @JsonProperty(value = "client_code")
     private String clientCode;
 
     /**
      * Доход (%) на дату выкупа
      */
-    @JsonProperty
+    @JsonProperty(value = "accrued2")
     private BigDecimal accrued2;
 
     /**
      * Срок РЕПО, в календарных днях
      */
-    @JsonProperty
+    @JsonProperty(value = "repoterm")
     private int repoTerm;
 
     /**
      * Сумма РЕПО на текущую дату. Отображается с точностью 2 знака
      */
-    @JsonProperty
+    @JsonProperty(value = "repovalue")
     private BigDecimal repoValue;
 
     /**
      * Объём сделки выкупа РЕПО. Отображается с точностью 2 знака
      */
-    @JsonProperty
+    @JsonProperty(value = "repo2value")
     private BigDecimal repo2Value;
 
     /**
      * Начальный дисконт (%)
      */
-    @JsonProperty
+    @JsonProperty(value = "start_discount")
     private BigDecimal startDiscount;
 
     /**
      * Нижний дисконт (%)
      */
-    @JsonProperty
+    @JsonProperty(value = "lower_discount")
     private BigDecimal lowerDiscount;
 
     /**
      * Верхний дисконт (%)
      */
-    @JsonProperty
+    @JsonProperty(value = "upper_discount")
     private BigDecimal upperDiscount;
 
     /**
      * Блокировка обеспечения («Да»/«Нет»)
      */
-    @JsonProperty
+    @JsonProperty(value = "block_securities")
     private BigDecimal blockSecurities;
 
     /**
      * Клиринговая комиссия (ММВБ)
      */
-    @JsonProperty
+    @JsonProperty(value = "clearing_comission")
     private BigDecimal clearingComission;
 
     /**
      * Комиссия Фондовой биржи (ММВБ)
      */
-    @JsonProperty
+    @JsonProperty(value = "exchange_comission")
     private BigDecimal exchangeComission;
 
     /**
      * Комиссия Технического центра (ММВБ)
      */
-    @JsonProperty
+    @JsonProperty(value = "tech_center_comission")
     private BigDecimal techCenterComission;
 
     /**
      * Дата расчетов
      */
-    @JsonProperty
+    @JsonProperty(value = "settle_date")
     private int settleDate;
 
     /**
      * Валюта расчетов
      */
-    @JsonProperty
+    @JsonProperty(value = "settle_currency")
     private String settleCurrency;
 
     /**
      * Валюта
      */
-    @JsonProperty
+    @JsonProperty(value = "trade_currency")
     private String tradeCurrency;
 
     /**
      * Код биржи в торговой системе
      */
-    @JsonProperty
+    @JsonProperty(value = "exchange_code")
     private String exchangeCode;
 
     /**
      * Идентификатор рабочей станции
      */
-    @JsonProperty
+    @JsonProperty(value = "station_id")
     private long stationId;
 
     /**
      * Код бумаги заявки
      */
-    @JsonProperty
+    @JsonProperty(value = "sec_code")
     private String secCode;
 
     /**
      * Код класса заявки
      */
-    @JsonProperty
+    @JsonProperty(value = "class_code")
     private String classCode;
 
     /**
      * Дата и время
      */
-    @JsonProperty
-    private Date tradeDateTime;
+    @JsonProperty(value = "datetime")
+    private LocalDateTime tradeDateTime;
 
     /**
      * Идентификатор расчетного счета/кода в клиринговой организации
      */
-    @JsonProperty
+    @JsonProperty(value = "bank_acc_id")
     private String bankAccountId;
 
     /**
      * Комиссия брокера. Отображается с точностью до 2 двух знаков. Поле зарезервировано для будущего использования
      */
-    @JsonProperty
+    @JsonProperty(value = "broker_comission")
     private BigDecimal brokerComission;
 
     /**
      * Номер витринной сделки в Торговой Системе для сделок РЕПО с ЦК и SWAP
      */
-    @JsonProperty
+    @JsonProperty(value = "linked_trade")
     private long linkedTrade;
 
     /**
@@ -265,13 +266,13 @@ public class Deal extends StandardDataObject {
      * «1» – Нормальный;
      * «2» – Закрытие
      */
-    @JsonProperty
+    @JsonProperty(value = "period")
     private short period;
 
     /**
      * Идентификатор транзакции
      */
-    @JsonProperty
+    @JsonProperty(value = "trans_id")
     private long transactionId;
 
     /**
@@ -300,93 +301,36 @@ public class Deal extends StandardDataObject {
      * «21» – Адресная сделка второй части РЕПО с корзиной;
      * «22» – Перенос позиций срочного рынка
      */
-    @JsonProperty
+    @JsonProperty(value = "kind")
     private short kind;
 
     /**
      * Идентификатор счета в НКЦ (расчетный код)
      */
-    @JsonProperty
+    @JsonProperty(value = "clearing_bank_accid")
     private String clearingBankAccountId;
 
     /**
      * Дата и время снятия сделки
      */
-    @JsonProperty
-    private Date canceledDateTime;
+    @JsonProperty(value = "canceled_datetime")
+    private LocalDateTime canceledDateTime;
 
     /**
      * Идентификатор фирмы - участника клиринга
      */
-    @JsonProperty
+    @JsonProperty(value = "clearing_firmid")
     private String clearingFirmId;
 
     /**
      * Дополнительная информация по сделке, передаваемая торговой системой
      */
-    @JsonProperty
+    @JsonProperty(value = "system_ref")
     private String systemRef;
 
     /**
      * Идентификатор пользователя
      */
-    @JsonProperty
+    @JsonProperty(value = "uid")
     private long uid;
-
-    public Deal() {
-        super();
-    }
-
-    public Deal(QuikStandardDataObject quikDataObject) {
-        super(quikDataObject);
-        final var sourceDataObject = (QuikDeal) quikDataObject;
-        this.tradeNum = sourceDataObject.getTradeNum();
-        this.orderNum = sourceDataObject.getOrderNum();
-        this.brokerRef = sourceDataObject.getBrokerRef();
-        this.userId = sourceDataObject.getUserId();
-        this.firmId = sourceDataObject.getFirmId();
-        this.canceledUid = sourceDataObject.getCanceledUid();
-        this.account = StringUtils.nullIf(sourceDataObject.getAccount(), "");
-        this.price = sourceDataObject.getPrice();
-        this.quantity = sourceDataObject.getQuantity();
-        this.value = sourceDataObject.getValue();
-        this.accruedInterest = BigDecimalUtils.nullIf(sourceDataObject.getAccruedInterest(), BigDecimal.ZERO);
-        this.yield = BigDecimalUtils.nullIf(sourceDataObject.getYield(), BigDecimal.ZERO);
-        this.settleCode = StringUtils.nullIf(sourceDataObject.getSettleCode(), "");
-        this.cpFirmId = StringUtils.nullIf(sourceDataObject.getCpFirmId(), "");
-        this.flags = sourceDataObject.getFlags();
-        this.price2 = BigDecimalUtils.nullIf(sourceDataObject.getPrice2(), BigDecimal.ZERO);
-        this.repoRate = BigDecimalUtils.nullIf(sourceDataObject.getRepoRate(), BigDecimal.ZERO);
-        this.clientCode = StringUtils.nullIf(sourceDataObject.getClientCode(), "");
-        this.accrued2 = BigDecimalUtils.nullIf(sourceDataObject.getAccrued2(), BigDecimal.ZERO);
-        this.repoTerm = sourceDataObject.getRepoTerm();
-        this.repoValue = BigDecimalUtils.nullIf(sourceDataObject.getRepoValue(), BigDecimal.ZERO);
-        this.repo2Value = BigDecimalUtils.nullIf(sourceDataObject.getRepo2Value(), BigDecimal.ZERO);
-        this.startDiscount = BigDecimalUtils.nullIf(sourceDataObject.getStartDiscount(), BigDecimal.ZERO);
-        this.lowerDiscount = BigDecimalUtils.nullIf(sourceDataObject.getLowerDiscount(), BigDecimal.ZERO);
-        this.upperDiscount = BigDecimalUtils.nullIf(sourceDataObject.getUpperDiscount(), BigDecimal.ZERO);
-        this.blockSecurities = sourceDataObject.getBlockSecurities();
-        this.clearingComission = BigDecimalUtils.nullIf(sourceDataObject.getClearingComission(), BigDecimal.ZERO);
-        this.exchangeComission = BigDecimalUtils.nullIf(sourceDataObject.getExchangeComission(), BigDecimal.ZERO);
-        this.techCenterComission = BigDecimalUtils.nullIf(sourceDataObject.getTechCenterComission(), BigDecimal.ZERO);;
-        this.settleDate = sourceDataObject.getSettleDate();
-        this.settleCurrency = sourceDataObject.getSettleCurrency();
-        this.tradeCurrency = sourceDataObject.getTradeCurrency();
-        this.exchangeCode = sourceDataObject.getExchangeCode();
-        this.stationId = sourceDataObject.getStationId();
-        this.secCode = sourceDataObject.getSecCode();
-        this.classCode = sourceDataObject.getClassCode();
-        this.tradeDateTime = sourceDataObject.getTradeDateTime();
-        this.bankAccountId = sourceDataObject.getBankAccountId();
-        this.brokerComission = sourceDataObject.getBrokerComission();
-        this.linkedTrade = sourceDataObject.getLinkedTrade();
-        this.period = sourceDataObject.getPeriod();
-        this.transactionId = sourceDataObject.getTransactionId();
-        this.kind = sourceDataObject.getKind();
-        this.clearingBankAccountId = StringUtils.nullIf(sourceDataObject.getClearingBankAccountId(), "");
-        this.canceledDateTime = sourceDataObject.getCanceledDateTime();
-        this.clearingFirmId = StringUtils.nullIf(sourceDataObject.getClearingFirmId(), "");
-        this.systemRef = StringUtils.nullIf(sourceDataObject.getSystemRef(), "");
-        this.uid = sourceDataObject.getUid();
-    }
 }

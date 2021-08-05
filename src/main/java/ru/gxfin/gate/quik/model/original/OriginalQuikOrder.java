@@ -1,11 +1,15 @@
-package ru.gxfin.gate.quik.model.income;
+package ru.gxfin.gate.quik.model.original;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -13,8 +17,10 @@ import java.util.Date;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class QuikOrder extends QuikStandardDataObject {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class OriginalQuikOrder extends OriginalQuikStandardDataObject {
     /**
      * Номер заявки в торговой системе
      */
@@ -133,7 +139,7 @@ public class QuikOrder extends QuikStandardDataObject {
      * Время активации
      */
     @JsonProperty(value = "activation_time")
-    private Date activationTime;
+    private LocalDateTime activationTime;
 
     /**
      * Номер заявки в торговой системе
@@ -163,13 +169,13 @@ public class QuikOrder extends QuikStandardDataObject {
      * Дата и время
      */
     @JsonProperty(value = "datetime")
-    private Date tradeDateTime;
+    private LocalDateTime tradeDateTime;
 
     /**
      * Дата и время снятия заявки
      */
     @JsonProperty(value = "withdraw_datetime")
-    private Date withdrawDateTime;
+    private LocalDateTime withdrawDateTime;
 
     /**
      * Идентификатор расчетного счета/кода в клиринговой организации
@@ -222,7 +228,7 @@ public class QuikOrder extends QuikStandardDataObject {
      * Причина отклонения заявки брокером
      */
     @JsonProperty(value = "reject_reason")
-    private String rejectRreason;
+    private String rejectReason;
 
     /**
      * Битовое поле для получения специфических параметров с западных площадок

@@ -3,7 +3,7 @@ package ru.gxfin.gate.quik.model.internal;
 /**
  * Направления сделок
  */
-public enum DealDirection{
+public enum QuikDealDirection {
     /**
      * Buy - Покупку
      */

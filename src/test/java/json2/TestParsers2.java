@@ -1,5 +1,6 @@
 package json2;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import json.model.TestObject;
 import json2.model.TestMainObject;
 import json2.model.TestRefObject;

@@ -1,9 +1,11 @@
-package ru.gxfin.gate.quik.model.income;
+package ru.gxfin.gate.quik.model.original;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 
@@ -12,8 +14,10 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class QuikSecurity extends QuikStandardDataObject {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class OriginalQuikSecurity extends OriginalQuikStandardDataObject {
     /**
      * Код инструмента
      */
@@ -60,7 +64,7 @@ public class QuikSecurity extends QuikStandardDataObject {
      * Точность (количество значащих цифр после запятой)
      */
     @JsonProperty(value = "scale")
-    private String scale;
+    private int scale;
 
     /**
      * Дата погашения

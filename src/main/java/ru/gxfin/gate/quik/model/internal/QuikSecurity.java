@@ -1,11 +1,15 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import ru.gxfin.gate.quik.model.income.QuikSecurity;
-import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+import ru.gxfin.common.data.ObjectCreateException;
+import ru.gxfin.gate.quik.model.memdata.QuikSecuritiesMemoryRepository;
+import ru.gxfin.gate.quik.model.original.OriginalQuikSecurity;
+import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
 
 import java.math.BigDecimal;
 
@@ -14,91 +18,94 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class Security extends StandardDataObject {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = QuikSecuritiesMemoryRepository.IdResolver.class)
+public class QuikSecurity extends QuikStandardDataObject {
+    private String id;
+
+    /**
+     * Вычисление идентификатора инструмента.
+     */
+    protected void calcId() {
+        this.id = this.code + ":" + this.classCode;
+    }
+
     /**
      * Код инструмента
      */
-    @JsonProperty
     private String code;
 
     /**
      * Наименование инструмента
      */
-    @JsonProperty
     private String name;
 
     /**
      * Короткое наименование инструмента
      */
-    @JsonProperty
     private String shortName;
 
     /**
      * Код класса инструментов
      */
-    @JsonProperty
     private String classCode;
 
     /**
      * Наименование класса инструментов
      */
-    @JsonProperty
     private String className;
 
     /**
      * Номинал
      */
-    @JsonProperty
     private BigDecimal faceValue;
 
     /**
      * Валюта номинала
      */
-    @JsonProperty
     private String faceUnit;
 
     /**
      * Точность (количество значащих цифр после запятой)
      */
-    @JsonProperty
-    private String scale;
+    private int scale;
 
     /**
      * Дата погашения
      */
-    @JsonProperty
     private long maturityDate;
 
     /**
      * Размер лота
      */
-    @JsonProperty
     private BigDecimal lotSize;
 
     /**
      * ISIN
      */
-    @JsonProperty
     private String isinCode;
 
     /**
      * Минимальный шаг цены
      */
-    @JsonProperty
     private BigDecimal minPriceStep;
 
-    public Security() {
+    public QuikSecurity() {
         super();
     }
 
-    public Security(QuikStandardDataObject quikDataObject) {
+    public QuikSecurity(OriginalQuikStandardDataObject quikDataObject) {
         super(quikDataObject);
-        final var sourceDataObject = (QuikSecurity) quikDataObject;
+        final var sourceDataObject = (OriginalQuikSecurity) quikDataObject;
         this.code = sourceDataObject.getCode();
+        this.classCode = sourceDataObject.getClassCode();
+        // Определяем идентификатор - составной
+        calcId();
         this.name = sourceDataObject.getName();
         this.shortName = sourceDataObject.getShortName();
-        this.classCode = sourceDataObject.getClassCode();
         this.className = sourceDataObject.getClassName();
         this.faceValue = sourceDataObject.getFaceValue();
         this.faceUnit = sourceDataObject.getFaceUnit();
@@ -107,5 +114,13 @@ public class Security extends StandardDataObject {
         this.lotSize = sourceDataObject.getLotSize();
         this.isinCode = sourceDataObject.getIsinCode();
         this.minPriceStep = sourceDataObject.getMinPriceStep();
+    }
+
+    @SuppressWarnings("unused")
+    @JsonCreator
+    public static QuikSecurity createObject(
+            @JsonProperty(value = "id") String id
+    ) throws ObjectCreateException {
+        return QuikSecuritiesMemoryRepository.ObjectsFactory.getOrCreateObject(id);
     }
 }

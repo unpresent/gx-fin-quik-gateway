@@ -1,11 +1,14 @@
-package ru.gxfin.gate.quik.model.income;
+package ru.gxfin.gate.quik.model.original;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -13,8 +16,10 @@ import java.util.Date;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class QuikAllTrade extends QuikStandardDataObject {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class OriginalQuikAllTrade extends OriginalQuikStandardDataObject {
 
     /**
      * Номер сделки в торговой системе
@@ -32,7 +37,7 @@ public class QuikAllTrade extends QuikStandardDataObject {
      * Дата и время
      */
     @JsonProperty(value = "datetime")
-    private Date tradeDateTime;
+    private LocalDateTime tradeDateTime;
 
     /**
      * Код биржи в торговой системе

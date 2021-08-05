@@ -40,7 +40,7 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
      * Если соединение не установленно, то null
      */
     public String getCurrentPipeName() {
-        return currentPipeFile.getName();
+        return currentPipeFile != null ? currentPipeFile.getName() : null;
     }
 
     /**
@@ -109,10 +109,10 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     /**
      * Открытие NamedPipe-а.
      * После открытия NamedPipe-а переходим в состояние ожидания.
-     * @throws IOException
-     * @throws QuikConnectorException
+     * @throws IOException              Ошибки при работе с NamedPipe.
+     * @throws InterruptedException     Ошибки при останове.
      */
-    protected synchronized void connectInternal() throws IOException, QuikConnectorException, InterruptedException {
+    protected synchronized void connectInternal() throws IOException, InterruptedException {
         this.state = ConnectorState.Connecting;
         try {
             this.currentPipe = null; // для случаев, если будут исключения
@@ -124,13 +124,13 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
             }
             Thread.sleep(100);
             this.currentPipe = new RandomAccessFile(this.currentPipeFile, PIPE_ACCESS_MODE);
-            log.info("opened RandomAccessFile success", this.currentPipeFile.getName());
+            log.info("opened RandomAccessFile {} success", this.currentPipeFile.getName());
             if (currentPipe != null) {
                 Thread.sleep(100);
                 channel = currentPipe.getChannel();
             }
             Thread.sleep(100);
-            if (!channel.isOpen()) {
+            if (channel != null && !channel.isOpen()) {
                 log.info("connectInternal(): can not open channel");
                 this.state = ConnectorState.Disconnected;
                 this.currentPipe.close();
@@ -150,14 +150,11 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
 
     /**
      * Попытка открытие NamedPipe-а с проверкой на существование файла-pipe-а, если есть вызывается connectInternal().
-     *
      * @return true = получилось установить соединение за отведенное количество попыток
-     * @throws IOException
-     * @throws QuikConnectorException
-     * @throws InterruptedException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
      */
     @Override
-    public synchronized boolean tryConnect() throws IOException, QuikConnectorException, InterruptedException {
+    public synchronized boolean tryConnect() throws QuikConnectorException {
         if (this.isActive() || this.currentPipe != null) {
             log.info("can not connect. Already is active!");
             throw new QuikConnectorException(THIS_NAME + " already is active!");
@@ -178,7 +175,7 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
                     break;
                 } catch (Exception e) {
                     this.pipeFile = null;
-                    log.info("{} can't connect to pipe {}; exception: {} {}", vPipeFile, e.getClass().getName(), e.getMessage());
+                    log.info("{} can't connect to pipe {}; exception: {} {}", getClass().getSimpleName(), vPipeFile, e.getClass().getName(), e.getMessage());
                     break;
                 }
             }
@@ -190,59 +187,14 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     }
 
     /**
-     * Попытка открытие NamedPipe-а в цикле.
-     * При обнаружении файла-pipe-а вызывается connect().
-     *
-     * @param attempts количество попыток подключиться
-     * @param pauseMs  пауза в миллисекундах между попытками
-     * @return true = получилось установить соединение за отведенное количество попыток
-     * @throws IOException
-     * @throws QuikConnectorException
-     * @throws InterruptedException
-     */
-    /*
-    @Override
-    public synchronized boolean tryConnect(int attempts, int pauseMs) throws IOException, QuikConnectorException, InterruptedException {
-        if (attempts < 1) {
-            log.info("tryConnect(attempts, pauseMs) illegal argument attempts = {}", attempts);
-            throw new IllegalArgumentException(THIS_NAME + "illegal argument attempts = " + attempts);
-        }
-        if (pauseMs < 0) {
-            log.info("tryConnect(attempts, pauseMs) illegal argument pauseMs = {}", pauseMs);
-            throw new IllegalArgumentException(THIS_NAME + "illegal argument attempts = " + attempts);
-
-        }
-
-        log.info("tryConnect(attempts, pauseMs): attempts = {}, pauseMs = {}", attempts, pauseMs);
-
-        boolean result = false;
-        for (var i = 0; i < attempts; i++) {
-            result = tryConnect();
-            if (result) {
-                break;
-            } else {
-                log.info("is sleeping, because tryConnect() returns false");
-                Thread.sleep(pauseMs);
-            }
-        }
-
-        log.debug("has finished tryConnect(attempts, pauseMs) to {}, result = {}", this.pipeName, result);
-        return result;
-    }
-    //*/
-
-    /**
      * Закрытие NamedPipe-а.
-     *
-     * @throws IOException
-     * @throws QuikConnectorException
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
     @Override
     public synchronized void disconnect() throws IOException {
         this.state = ConnectorState.Disconnected;
         try {
             log.info("is disconnecting; currentPipeFile == {}", this.getCurrentPipeName());
-
             if (this.currentPipe != null) {
                 try {
                     this.currentPipe.close();
@@ -258,10 +210,9 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
 
     /**
      * Чтение сообщение из NamedPipe (т.е. получение сообщения от Quik-а)
-     *
      * @return String
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
     @Override
     public synchronized String receiveMessage() throws QuikConnectorException, IOException {
@@ -303,10 +254,9 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
 
     /**
      * Запись сообщения в NamedPipe (т.е. отправка сообщения в Quik)
-     *
-     * @param message
-     * @throws QuikConnectorException
-     * @throws IOException
+     * @param message                   Отправляемое сообщение.
+     * @throws QuikConnectorException   Ошибка в работе Connector-а.
+     * @throws IOException              Ошибки при работе с NamedPipe.
      */
     @Override
     public synchronized void sendMessage(String message) throws QuikConnectorException, IOException {
@@ -324,7 +274,7 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
             final var len = message.length();
             log.trace("writing message: (len == {}) {}", len, len < TRACE_FIRST_SYMBOLS ? message : message.substring(0, TRACE_FIRST_SYMBOLS - 1) + "...");
             this.currentPipe.write(message.getBytes());
-            log.debug("written message", message.length());
+            log.debug("written message; length = {}", message.length());
         } finally {
             log.debug("is waiting");
             this.state = ConnectorState.WaitCommand;

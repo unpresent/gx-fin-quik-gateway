@@ -1,14 +1,17 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
+import ru.gxfin.common.data.ObjectCreateException;
 import ru.gxfin.common.utils.BigDecimalUtils;
 import ru.gxfin.common.utils.StringUtils;
-import ru.gxfin.gate.quik.model.income.QuikAllTrade;
-import ru.gxfin.gate.quik.model.income.QuikStandardDataObject;
+import ru.gxfin.gate.quik.model.memdata.QuikAllTradesMemoryRepository;
+import ru.gxfin.gate.quik.model.original.OriginalQuikAllTrade;
+import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,104 +22,102 @@ import java.time.ZoneId;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
 @ToString
-public class AllTrade extends StandardDataObject {
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = QuikAllTradesMemoryRepository.IdResolver.class)
+public class QuikAllTrade extends QuikStandardDataObject {
+    /**
+     * Идентификатор сделки - составной ключ = {@link #exchangeCode} + ":" + {@link #tradeNum}.
+     */
+    private String id;
+
+    /**
+     * Вычисление идентификатора сделки.
+     */
+    protected void calcId() {
+        this.id = this.exchangeCode + ":" + this.tradeNum;
+    }
 
     /**
      * Номер сделки в торговой системе
      */
-    @JsonProperty
     private String tradeNum;
 
     /**
      * Направление сделки (Покупка / Продажа)
      */
-    @JsonProperty
-    private DealDirection direction;
+    private QuikDealDirection direction;
 
     /**
      * Дата и время
      */
-    @JsonProperty
     private LocalDateTime tradeDateTime;
 
     /**
      * Код биржи в торговой системе
      */
-    @JsonProperty
     private String exchangeCode;
 
     /**
      * Код класса
      */
-    @JsonProperty
     private String classCode;
 
     /**
      * Код бумаги заявки
      */
-    @JsonProperty
     private String secCode;
 
     /**
      * Цена
      */
-    @JsonProperty
     private BigDecimal price;
 
     /**
      * Количество бумаг в последней сделке в лотах
      */
-    @JsonProperty
     private BigDecimal quantity;
 
     /**
      * Объем в денежных средствах
      */
-    @JsonProperty
     private BigDecimal value;
 
     /**
      * Накопленный купонный доход
      */
-    @JsonProperty
     private BigDecimal accruedInterest;
 
     /**
      * Доходность
      */
-    @JsonProperty
     private BigDecimal yield;
 
     /**
      * Код расчетов
      */
-    @JsonProperty
     private String settleCode;
 
     /**
      * Ставка РЕПО (%)
      */
-    @JsonProperty
     private BigDecimal repoRate;
 
     /**
      * Сумма РЕПО
      */
-    @JsonProperty
     private BigDecimal repoValue;
 
     /**
      * Объем выкупа РЕПО
      */
-    @JsonProperty
     private BigDecimal repo2Value;
 
     /**
      * Срок РЕПО в днях
      */
-    @JsonProperty
     private int repoTerm;
 
     /**
@@ -125,30 +126,35 @@ public class AllTrade extends StandardDataObject {
      * «1» – Нормальный;
      * «2» – Закрытие
      */
-    @JsonProperty
     private short period;
 
     /**
      * Открытый интерес
      */
-    @JsonProperty
     private int openInterest;
 
-    public AllTrade() {
+    public QuikAllTrade() {
         super();
     }
 
-    public AllTrade(QuikStandardDataObject quikDataObject) {
+    public QuikAllTrade(OriginalQuikStandardDataObject quikDataObject) {
         super(quikDataObject);
-        final var sourceDataObject = (QuikAllTrade) quikDataObject;
+        final var sourceDataObject = (OriginalQuikAllTrade) quikDataObject;
+        // Определяем код площадки
+        this.classCode = StringUtils.nullIf(sourceDataObject.getClassCode(), "");
+        this.exchangeCode = extractExchangeCode(sourceDataObject.getExchangeCode(), this.classCode);
+        // Номер сделки
         this.tradeNum = sourceDataObject.getTradeNum();
-        this.direction = sourceDataObject.getFlags() == 0 ? DealDirection.S : DealDirection.B;
-        this.tradeDateTime = sourceDataObject.getTradeDateTime()
+        // Определяем идентификатор - составной
+        calcId();
+        // Остальные поля
+        this.direction = sourceDataObject.getFlags() == 0 ? QuikDealDirection.S : QuikDealDirection.B;
+        this.tradeDateTime = sourceDataObject.getTradeDateTime();
+        /*
                 .toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDateTime();
-        this.exchangeCode = sourceDataObject.getExchangeCode();
-        this.classCode = StringUtils.nullIf(sourceDataObject.getClassCode(), "");
+        //*/
         this.secCode = StringUtils.nullIf(sourceDataObject.getSecCode(), "");
         this.price = sourceDataObject.getPrice();
         this.quantity = sourceDataObject.getQuantity();
@@ -162,5 +168,13 @@ public class AllTrade extends StandardDataObject {
         this.repoTerm = sourceDataObject.getRepoTerm();
         this.period = sourceDataObject.getPeriod();
         this.openInterest = sourceDataObject.getOpenInterest();
+    }
+
+    @SuppressWarnings("unused")
+    @JsonCreator
+    public static QuikAllTrade createObject(
+            @JsonProperty(value = "id") String id
+    ) throws ObjectCreateException {
+        return QuikAllTradesMemoryRepository.ObjectsFactory.getOrCreateObject(id);
     }
 }

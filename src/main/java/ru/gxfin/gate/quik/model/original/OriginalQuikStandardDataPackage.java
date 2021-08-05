@@ -1,4 +1,4 @@
-package ru.gxfin.gate.quik.model.income;
+package ru.gxfin.gate.quik.model.original;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -8,8 +8,8 @@ import ru.gxfin.common.data.AbstractDataPackage;
 
 import java.util.Collection;
 
-@EqualsAndHashCode
-public abstract class QuikStandardDataPackage<T extends QuikStandardDataObject> extends AbstractDataPackage<T> {
+@EqualsAndHashCode(callSuper = true)
+public abstract class OriginalQuikStandardDataPackage<T extends OriginalQuikStandardDataObject> extends AbstractDataPackage<T> {
     @JsonProperty(value = "package_size")
     @Getter
     @Setter
@@ -25,8 +25,8 @@ public abstract class QuikStandardDataPackage<T extends QuikStandardDataObject> 
 
     @JsonProperty(value = "rows")
     @Override
-    public Collection<T> getItems() {
-        return super.getItems();
+    public Collection<T> getObjects() {
+        return super.getObjects();
     }
 
     public T getRow(int index) {
