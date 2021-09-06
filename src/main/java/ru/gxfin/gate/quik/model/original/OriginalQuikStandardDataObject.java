@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.AbstractDataObjectWithKey;
+import ru.gxfin.common.data.AbstractDataObject;
 
 /**
  * Базовый тип для DTO (объектов передачи данных) из Quik-а.
@@ -16,15 +16,10 @@ import ru.gxfin.common.data.AbstractDataObjectWithKey;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public abstract class OriginalQuikStandardDataObject extends AbstractDataObjectWithKey {
+public abstract class OriginalQuikStandardDataObject extends AbstractDataObject {
     /**
      * Номер записи по порядку
      */
     @JsonProperty(value = "row_index")
     private int rowIndex;
-
-    @Override
-    public Object getKey() {
-        return this.rowIndex;
-    }
 }

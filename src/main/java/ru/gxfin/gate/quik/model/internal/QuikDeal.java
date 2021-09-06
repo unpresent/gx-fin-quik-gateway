@@ -1,12 +1,13 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.ObjectCreateException;
 import ru.gxfin.common.utils.BigDecimalUtils;
 import ru.gxfin.common.utils.StringUtils;
 import ru.gxfin.gate.quik.model.memdata.QuikDealsMemoryRepository;
@@ -15,8 +16,6 @@ import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  * Сделка
@@ -371,11 +370,11 @@ public class QuikDeal extends QuikStandardDataObject {
         this.uid = sourceDataObject.getUid();
     }
 
-    @SuppressWarnings("unused")
-    @JsonCreator
-    public static QuikDeal createObject(
-            @JsonProperty(value = "id") String id
-    ) throws ObjectCreateException {
-        return QuikDealsMemoryRepository.ObjectsFactory.getOrCreateObject(id);
-    }
+    //    @SuppressWarnings("unused")
+    //    @JsonCreator
+    //    public static QuikDeal createObject(
+    //            @JsonProperty(value = "id") String id
+    //    ) throws ObjectCreateException {
+    //        return QuikDealsMemoryRepository.ObjectsFactory.getOrCreateObject(id);
+    //    }
 }

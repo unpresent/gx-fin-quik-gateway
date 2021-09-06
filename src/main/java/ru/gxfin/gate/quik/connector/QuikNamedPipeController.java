@@ -29,7 +29,7 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     private static final int TRACE_FIRST_SYMBOLS = 512;
 
     /**
-     * Режим доступа к NamedPipe. rw - Read + Write - двусторонний доступ
+     * Режим доступа к NamedPipe: rw - Read + Write - двусторонний доступ.
      */
     private static final String PIPE_ACCESS_MODE = "rw";
 
@@ -49,13 +49,13 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     private final byte[] inBuffer;
 
     /**
-     * Определяет имя pipe-а, с которым будет установлено следующиее соединение
+     * Определяет имя pipe-а, с которым будет установлено следующее соединение.
      */
     @Getter
     private String pipeName;
 
     /**
-     * Определяет файл-pipe-а, с которым будет установлено следующиее соединение
+     * Определяет файл-pipe-а, с которым будет установлено следующее соединение.
      */
     private File pipeFile;
 
@@ -66,13 +66,13 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     private File currentPipeFile;
 
     /**
-     * Сосотояние Connector-а
+     * Состояние Connector-а.
      */
     @Getter
     private ConnectorState state;
 
     /**
-     * NamedPipe, через который происходит обмен данными с Quik-ом
+     * NamedPipe, через который происходит обмен данными с Quik-ом.
      */
     private RandomAccessFile currentPipe;
 
@@ -92,7 +92,7 @@ class QuikNamedPipeController implements QuikConnectionApi, QuikNamedPipeMesseng
     /**
      * Инициализирует параметры Connector-а.
      *
-     * @param pipeName имя NamedPipe-а, которое будет испольоваться для связи с Quik
+     * @param pipeName имя NamedPipe-а, которое будет использоваться для связи с Quik.
      */
     @Override
     public synchronized void init(String pipeName) {

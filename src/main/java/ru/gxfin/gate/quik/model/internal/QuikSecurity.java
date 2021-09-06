@@ -1,12 +1,13 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.ObjectCreateException;
 import ru.gxfin.gate.quik.model.memdata.QuikSecuritiesMemoryRepository;
 import ru.gxfin.gate.quik.model.original.OriginalQuikSecurity;
 import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
@@ -114,13 +115,5 @@ public class QuikSecurity extends QuikStandardDataObject {
         this.lotSize = sourceDataObject.getLotSize();
         this.isinCode = sourceDataObject.getIsinCode();
         this.minPriceStep = sourceDataObject.getMinPriceStep();
-    }
-
-    @SuppressWarnings("unused")
-    @JsonCreator
-    public static QuikSecurity createObject(
-            @JsonProperty(value = "id") String id
-    ) throws ObjectCreateException {
-        return QuikSecuritiesMemoryRepository.ObjectsFactory.getOrCreateObject(id);
     }
 }

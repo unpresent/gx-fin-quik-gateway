@@ -1,6 +1,5 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,10 +61,12 @@ public class QuikSessionState extends AbstractDataObject {
      */
     private String ipComment;
 
+    @SuppressWarnings("unused")
     public QuikSessionState() {
         super();
     }
 
+    @SuppressWarnings("unused")
     public QuikSessionState(OriginalQuikSessionState sourceDataObject) {
         super();
         this.isConnected = sourceDataObject.isConnected();

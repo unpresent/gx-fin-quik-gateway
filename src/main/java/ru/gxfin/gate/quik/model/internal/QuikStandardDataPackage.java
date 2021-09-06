@@ -26,12 +26,12 @@ public abstract class QuikStandardDataPackage<T extends QuikStandardDataObject> 
     }
 
     @SuppressWarnings("rawtypes")
-    public QuikStandardDataPackage(OriginalQuikStandardDataPackage quikDataPackage) {
+    public QuikStandardDataPackage(OriginalQuikStandardDataPackage originalQuikDataPackage) {
         super();
-        this.allCount = quikDataPackage.getQuikAllCount();
-        final var n = quikDataPackage.size();
+        this.allCount = originalQuikDataPackage.getQuikAllCount();
+        final var n = originalQuikDataPackage.size();
         for (int i = 0; i < n; i++) {
-            this.getListObjects().add(createInstanceFromQuikSource((OriginalQuikStandardDataObject)quikDataPackage.get(i)));
+            this.getListObjects().add(createInstanceFromQuikSource((OriginalQuikStandardDataObject)originalQuikDataPackage.get(i)));
         }
     }
 }

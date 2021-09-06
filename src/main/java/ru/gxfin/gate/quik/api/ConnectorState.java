@@ -21,7 +21,7 @@ public enum ConnectorState {
     WaitCommand,
 
     /**
-     * В процессе чтения сообщения из NamedPipe
+     * В процессе чтения сообщения из NamedPipe.
      */
     Receiving,
 

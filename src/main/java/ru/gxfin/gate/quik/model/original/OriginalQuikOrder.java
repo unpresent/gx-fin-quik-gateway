@@ -139,7 +139,7 @@ public class OriginalQuikOrder extends OriginalQuikStandardDataObject {
      * Время активации
      */
     @JsonProperty(value = "activation_time")
-    private LocalDateTime activationTime;
+    private long activationTime;
 
     /**
      * Номер заявки в торговой системе

@@ -11,18 +11,18 @@ import java.io.IOException;
  */
 public interface QuikNamedPipeMessenger {
     /**
-     * Чтение сообщение из NamedPipe (т.е. получение сообщения от Quik-а)
-     * @return String
-     * @throws QuikConnectorException
-     * @throws IOException
+     * Чтение сообщение из NamedPipe (т.е. получение сообщения от Quik-а).
+     * @return Строка - тело сообщения.
+     * @throws QuikConnectorException Ошибка соединения с Quik.
+     * @throws IOException Ошибка чтения из NamedPipe-файла.
      */
     String receiveMessage() throws QuikConnectorException, IOException;
 
     /**
-     * Запись сообщения в NamedPipe (т.е. отправка сообщения в Quik)
-     * @param message
-     * @throws QuikConnectorException
-     * @throws IOException
+     * Запись сообщения в NamedPipe (т.е. отправка сообщения в Quik).
+     * @param message Строка - тело сообщения.
+     * @throws QuikConnectorException Ошибка соединения с Quik.
+     * @throws IOException Ошибка записи в NamedPipe-файл.
      */
     void sendMessage(String message) throws QuikConnectorException, IOException;
 }

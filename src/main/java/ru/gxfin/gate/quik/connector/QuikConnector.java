@@ -12,7 +12,7 @@ import ru.gxfin.gate.quik.errors.QuikConnectorException;
 import java.io.IOException;
 
 /**
- * Реализация API взаимодействия с Quik
+ * Реализация API взаимодействия с Quik.
  *
  * @author Vladimir Gagarkin
  * @since 1.0
@@ -23,32 +23,32 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
     private final ObjectMapper objectMapper;
 
     /**
-     * Объект форматирования команды на полуение AllTradesPackage.
-     * Делаем полем Connector-а для повтороного использования (возможно, т.к. Reset делается внтури synchronized)
+     * Объект форматирования команды на получение AllTradesPackage.
+     * Делаем полем Connector-а для повторного использования (возможно, т.к. Reset делается внутри synchronized)
      */
     private final QuikNamedPipeCommandGetAllTradesPackage commandGetAllTradesPackage;
 
     /**
-     * Объект форматирования команды на полуение DealsPackage.
-     * Делаем полем Connector-а для повтороного использования (возможно, т.к. Reset делается внтури synchronized)
+     * Объект форматирования команды на получение DealsPackage.
+     * Делаем полем Connector-а для повторного использования (возможно, т.к. Reset делается внутри synchronized).
      */
     private final QuikNamedPipeCommandGetDealsPackage commandGetDealsPackage;
 
     /**
-     * Объект форматирования команды на полуение OrdersPackage.
-     * Делаем полем Connector-а для повтороного использования (возможно, т.к. Reset делается внтури synchronized)
+     * Объект форматирования команды на получение OrdersPackage.
+     * Делаем полем Connector-а для повторного использования (возможно, т.к. Reset делается внутри synchronized).
      */
     private final QuikNamedPipeCommandGetOrdersPackage commandGetOrdersPackage;
 
     /**
-     * Объект форматирования команды на полуение SecuritiesPackage.
-     * Делаем полем Connector-а для повтороного использования (возможно, т.к. Reset делается внтури synchronized)
+     * Объект форматирования команды на получение SecuritiesPackage.
+     * Делаем полем Connector-а для повторного использования (возможно, т.к. Reset делается внутри synchronized).
      */
     private final QuikNamedPipeCommandGetSecuritiesPackage commandGetSecuritiesPackage;
 
     /**
-     * Объект форматирования команды на полуение SessionState.
-     * Делаем полем Connector-а для повтороного использования (возможно, т.к. Reset делается внтури synchronized)
+     * Объект форматирования команды на получение SessionState.
+     * Делаем полем Connector-а для повторного использования (возможно, т.к. Reset делается внутри synchronized).
      */
     private final QuikNamedPipeCommandGetSessionState commandGetSessionState;
 
@@ -109,7 +109,7 @@ public class QuikConnector implements QuikConnectionApi, QuikGetApi {
         synchronized (this) {
             checkIsActive("get " + getCommand.getCommandName());
 
-            // Возможно повторное использование getCommand, т.к. используется внтури synchronized всегда в одном потоке
+            // Возможно повторное использование getCommand, т.к. используется внутри synchronized всегда в одном потоке
             getCommand.Reset(fromRowIndex, packageSizeLimit);
 
             String commandMessage = getCommand.toMessage();

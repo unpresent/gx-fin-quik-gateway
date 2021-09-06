@@ -1,12 +1,13 @@
 package ru.gxfin.gate.quik.model.internal;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.ObjectCreateException;
 import ru.gxfin.common.utils.BigDecimalUtils;
 import ru.gxfin.common.utils.StringUtils;
 import ru.gxfin.gate.quik.model.memdata.QuikOrdersMemoryRepository;
@@ -15,8 +16,6 @@ import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 /**
  * Заявка
@@ -141,7 +140,7 @@ public class QuikOrder extends QuikStandardDataObject {
     /**
      * Время активации
      */
-    private LocalDateTime activationTime;
+    private long activationTime;
 
     /**
      * Номер заявки в торговой системе
@@ -174,7 +173,7 @@ public class QuikOrder extends QuikStandardDataObject {
     private LocalDateTime withdrawDateTime;
 
     /**
-     * Идентификатор расчетного счета/кода в клиринговой организации
+     * Идентификатор расчетного счета/кода в клиринговой организации.
      */
     private String bankAccountId;
 
@@ -313,13 +312,5 @@ public class QuikOrder extends QuikStandardDataObject {
         this.capacity = BigDecimalUtils.nullIf(sourceDataObject.getCapacity(), BigDecimal.ZERO);
         this.passiveOnlyOrder = sourceDataObject.getPassiveOnlyOrder();
         this.visible = sourceDataObject.getVisible();
-    }
-
-    @SuppressWarnings("unused")
-    @JsonCreator
-    public static QuikOrder createObject(
-            @JsonProperty(value = "id") String id
-    ) throws ObjectCreateException {
-        return QuikOrdersMemoryRepository.ObjectsFactory.getOrCreateObject(id);
     }
 }

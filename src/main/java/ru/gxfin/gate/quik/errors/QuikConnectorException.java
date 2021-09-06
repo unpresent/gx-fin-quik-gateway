@@ -3,7 +3,7 @@ package ru.gxfin.gate.quik.errors;
 import ru.gxfin.gate.quik.api.QuikNamedPipeMessenger;
 
 /**
- * Сигнализирует об ошибках в логие работы QuikConnector-а
+ * Сигнализирует об ошибках в логике работы QuikConnector-а.
  *
  * @author  Vladimir Gagarkin
  * @see     QuikNamedPipeMessenger
@@ -11,14 +11,6 @@ import ru.gxfin.gate.quik.api.QuikNamedPipeMessenger;
  */
 public class QuikConnectorException extends Exception {
     // static final long serialVersionUID;
-
-    /**
-     * Constructs an {@code QuikConnectorException} with {@code null}
-     * as its error detail message.
-     */
-    public QuikConnectorException() {
-        super();
-    }
 
     /**
      * Constructs an {@code QuikConnectorException} with the specified detail message.
@@ -50,6 +42,7 @@ public class QuikConnectorException extends Exception {
      *
      * @since 1.0
      */
+    @SuppressWarnings("unused")
     public QuikConnectorException(String message, Throwable cause) {
         super(message, cause);
     }
@@ -68,6 +61,7 @@ public class QuikConnectorException extends Exception {
      *
      * @since 1.0
      */
+    @SuppressWarnings("unused")
     public QuikConnectorException(Throwable cause) {
         super(cause);
     }

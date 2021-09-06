@@ -3,8 +3,8 @@ package ru.gxfin.gate.quik.model.internal;
 import ru.gxfin.gate.quik.model.original.OriginalQuikDealsPackage;
 import ru.gxfin.gate.quik.model.original.OriginalQuikStandardDataObject;
 
+@SuppressWarnings("unused")
 public class QuikDealsPackage extends QuikStandardDataPackage<QuikDeal> {
-    @SuppressWarnings("unused")
     public QuikDealsPackage() {
         super();
     }

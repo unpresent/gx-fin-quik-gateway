@@ -10,6 +10,7 @@ import java.io.IOException;
  * @author Vladimir Gagarkin
  * @since 1.0
  */
+@SuppressWarnings("unused")
 public interface QuikGetApi {
     /**
      * Получить пакет обезличенных сделок
@@ -52,7 +53,7 @@ public interface QuikGetApi {
     OriginalQuikSecuritiesPackage getSecuritiesPackage(long fromRowIndex, int packageSizeLimit) throws QuikConnectorException, IOException;
 
     /**
-     * Получить состяние сессии Quik-а
+     * Получить состояние сессии Quik-а.
      * @return DTO SessionState
      * @throws QuikConnectorException   Ошибка в работе Connector-а.
      * @throws IOException              Ошибки при работе с NamedPipe.
