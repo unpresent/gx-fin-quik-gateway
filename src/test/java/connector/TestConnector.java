@@ -3,10 +3,10 @@ package connector;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
-import ru.gxfin.gate.quik.connector.QuikConnector;
-import ru.gxfin.gate.quik.errors.QuikConnectorException;
-import ru.gxfin.gate.quik.model.original.OriginalQuikAllTradesPackage;
-import ru.gxfin.gate.quik.model.original.OriginalQuikSessionState;
+import ru.gx.fin.gate.quik.connector.QuikConnector;
+import ru.gx.fin.gate.quik.errors.QuikConnectorException;
+import ru.gx.fin.gate.quik.model.original.OriginalQuikAllTradesPackage;
+import ru.gx.fin.gate.quik.model.original.OriginalQuikSessionState;
 
 import java.io.IOException;
 import java.util.logging.Level;

@@ -9,11 +9,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.AbstractDataObject;
+import ru.gx.data.AbstractDataObject;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 public class TestObject extends AbstractDataObject {

@@ -1,20 +1,19 @@
 package json2.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import json2.memdata.TestRefObjectsMemRepo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.AbstractDataObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import ru.gx.data.AbstractDataObject;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
 @Accessors(chain = true)
 @JsonIdentityInfo(property = "code", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = TestRefObjectsMemRepo.class)
@@ -25,6 +24,6 @@ public class TestRefObject extends AbstractDataObject {
     @JsonProperty
     private String parentCode;
 
-    @JsonProperty(required = false)
+    @JsonProperty
     private String name;
 }

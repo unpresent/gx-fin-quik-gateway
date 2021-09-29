@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gxfin.common.data.AbstractDataObject;
+import ru.gx.data.AbstractDataObject;
 
 import java.util.HashMap;
 import java.util.Map;

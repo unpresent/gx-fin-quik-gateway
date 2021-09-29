@@ -2,7 +2,8 @@ package json2.memdata;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
-import ru.gxfin.common.data.AbstractDataObject;
+import org.jetbrains.annotations.NotNull;
+import ru.gx.data.AbstractDataObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +11,12 @@ import java.util.Map;
 public abstract class AbstractMemRepo<E extends AbstractDataObject> implements ObjectIdResolver {
     private final Map<Object, E> objects = new HashMap<>();
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void bindItem(ObjectIdGenerator.IdKey id, Object pojo) {
+    public void bindItem(@NotNull final ObjectIdGenerator.IdKey id, @NotNull final Object pojo) {
         final var old = this.objects.get(id.key);
         if (old != null) {
-            if (old == pojo || (old != null && old.equals(pojo))) {
+            if (old == pojo || (old.equals(pojo))) {
                 return;
             }
             // TODO: Обновление объекта!

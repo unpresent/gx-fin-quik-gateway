@@ -8,7 +8,6 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.sql.Time;
-import java.util.Date;
 
 @Getter
 @Setter

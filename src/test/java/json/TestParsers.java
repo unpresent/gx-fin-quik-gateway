@@ -9,10 +9,10 @@ import json.model.TestPackage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
-import ru.gxfin.gate.quik.model.internal.QuikAllTradesPackage;
-import ru.gxfin.gate.quik.model.internal.QuikSecurity;
-import ru.gxfin.gate.quik.model.original.OriginalQuikAllTrade;
-import ru.gxfin.gate.quik.model.original.OriginalQuikAllTradesPackage;
+import ru.gx.fin.gate.quik.model.internal.QuikAllTradesPackage;
+import ru.gx.fin.gate.quik.model.internal.QuikSecurity;
+import ru.gx.fin.gate.quik.model.original.OriginalQuikAllTrade;
+import ru.gx.fin.gate.quik.model.original.OriginalQuikAllTradesPackage;
 
 import java.sql.Time;
 import java.time.LocalTime;
