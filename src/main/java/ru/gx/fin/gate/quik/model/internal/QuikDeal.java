@@ -3,10 +3,7 @@ package ru.gx.fin.gate.quik.model.internal;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
 import ru.gx.utils.BigDecimalUtils;
@@ -26,6 +23,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @ToString
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonIdentityInfo(property = "rowIndex", generator = ObjectIdGenerators.PropertyGenerator.class, resolver = QuikDealsMemoryRepository.IdResolver.class)
 public class QuikDeal extends QuikStandardDataObject {

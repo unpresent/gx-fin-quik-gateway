@@ -135,6 +135,11 @@ public class QuikAllTrade extends QuikStandardDataObject {
      */
     private int openInterest;
 
+    @SuppressWarnings("unused")
+    public QuikAllTrade() {
+        super();
+    }
+
     public QuikAllTrade(@NotNull final OriginalQuikStandardDataObject quikDataObject) {
         super(quikDataObject);
         final var sourceDataObject = (OriginalQuikAllTrade) quikDataObject;
