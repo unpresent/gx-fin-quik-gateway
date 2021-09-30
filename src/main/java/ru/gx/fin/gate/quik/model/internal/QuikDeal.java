@@ -41,7 +41,6 @@ public class QuikDeal extends QuikStandardDataObject {
         this.id = this.exchangeCode + ":" + this.tradeNum;
     }
 
-
     /**
      * Номер сделки в торговой системе
      */
