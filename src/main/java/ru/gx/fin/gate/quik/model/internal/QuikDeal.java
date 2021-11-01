@@ -1,5 +1,6 @@
 package ru.gx.fin.gate.quik.model.internal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -224,6 +225,7 @@ public class QuikDeal extends QuikStandardDataObject {
     /**
      * Дата и время
      */
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime tradeDateTime;
 
     /**
@@ -290,6 +292,7 @@ public class QuikDeal extends QuikStandardDataObject {
     /**
      * Дата и время снятия сделки
      */
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime canceledDateTime;
 
     /**

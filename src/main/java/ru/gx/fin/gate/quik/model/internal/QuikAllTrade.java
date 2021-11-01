@@ -1,5 +1,6 @@
 package ru.gx.fin.gate.quik.model.internal;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -9,6 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.gx.utils.BigDecimalUtils;
 import ru.gx.utils.StringUtils;
 import ru.gx.fin.gate.quik.model.memdata.QuikAllTradesMemoryRepository;
@@ -55,6 +57,8 @@ public class QuikAllTrade extends QuikStandardDataObject {
     /**
      * Дата и время
      */
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss.SSS")
+    // @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime tradeDateTime;
 
     /**

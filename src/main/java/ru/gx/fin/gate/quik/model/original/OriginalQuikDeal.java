@@ -1,5 +1,6 @@
 package ru.gx.fin.gate.quik.model.original;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -239,6 +240,7 @@ public class OriginalQuikDeal extends OriginalQuikStandardDataObject {
      * Дата и время
      */
     @JsonProperty(value = "datetime")
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime tradeDateTime;
 
     /**
@@ -313,6 +315,7 @@ public class OriginalQuikDeal extends OriginalQuikStandardDataObject {
      * Дата и время снятия сделки
      */
     @JsonProperty(value = "canceled_datetime")
+    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime canceledDateTime;
 
     /**
