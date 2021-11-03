@@ -1,0 +1,2 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=ru.gx.fin.gate.quik.config.CommonAutoConfiguration
