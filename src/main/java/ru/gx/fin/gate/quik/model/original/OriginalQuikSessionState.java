@@ -1,12 +1,13 @@
 package ru.gx.fin.gate.quik.model.original;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import ru.gx.data.AbstractDataObject;
 
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -28,13 +29,15 @@ public class OriginalQuikSessionState extends AbstractDataObject {
      * Текущее время на сервере
      */
     @JsonProperty(value = "server_time")
-    private Time serverTime;
+    @JsonFormat(pattern = "H:mm:ss")
+    private LocalTime serverTime;
 
     /**
      * Время открытия соединения с Сервером
      */
     @JsonProperty(value = "connection_time")
-    private Time connectionTime;
+    @JsonFormat(pattern = "H:mm:ss")
+    private LocalTime connectionTime;
 
     /**
      * Версия Quik-а

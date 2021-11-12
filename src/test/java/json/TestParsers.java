@@ -9,10 +9,9 @@ import json.model.TestPackage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
-import ru.gx.fin.gate.quik.model.internal.QuikAllTradesPackage;
-import ru.gx.fin.gate.quik.model.internal.QuikSecurity;
 import ru.gx.fin.gate.quik.model.original.OriginalQuikAllTrade;
 import ru.gx.fin.gate.quik.model.original.OriginalQuikAllTradesPackage;
+import ru.gx.fin.gate.quik.model.original.OriginalQuikSecurity;
 
 import java.sql.Time;
 import java.time.LocalTime;
@@ -117,7 +116,6 @@ public class TestParsers {
         Assertions.assertEquals(18, testPackage.quikPackageSize, "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
     }
 
-    @SuppressWarnings("UnusedAssignment")
     @Test
     public void testJson2AllTradesPackage() throws Exception {
         //*
@@ -174,14 +172,11 @@ public class TestParsers {
         Assertions.assertEquals(18, tradesPackage.getQuikPackageSize(), "Ошибка Jackson-десериализации (package_size в packageSize) json-строки в AllTradesPackage");
         Assertions.assertNotNull(tradesPackage.getObjects(), "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage");
         // Assertions.assertEquals(18, tradesPackage.size(), "Ошибка Jackson-десериализации (rows в rows) json-строки в AllTradesPackage - количество записей");
-
-        final var stdAllTrades = new QuikAllTradesPackage(tradesPackage);
-        testMessage = objectMapper.writeValueAsString(stdAllTrades);
     }
 
     @Test
     public void TestGenerate() {
-        final var cls = QuikSecurity.class;
+        final var cls = OriginalQuikSecurity.class;
         for (var m : cls.getDeclaredFields()) {
             final var fieldNameInMethod = m.getName().substring(0, 1).toUpperCase() + m.getName().substring(1);
             System.out.println(".set" + fieldNameInMethod + "(source.get" + fieldNameInMethod + "())");
