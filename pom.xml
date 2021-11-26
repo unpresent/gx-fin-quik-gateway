@@ -17,7 +17,7 @@
 
         <gx-starter.version>1.2</gx-starter.version>
 
-        <org.springframework.boot.version>2.5.5</org.springframework.boot.version>
+        <org.springframework.boot.version>2.6.0</org.springframework.boot.version>
         <org.springframework.kafka.version>2.7.0</org.springframework.kafka.version>
         <org.testcontainers.version>1.16.0</org.testcontainers.version>
 
@@ -56,9 +56,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ru.gx</groupId>
+            <groupId>ru.gx.core</groupId>
             <artifactId>gx-starter</artifactId>
-            <version>${gx-starter.version}</version>
+            <version>1.2</version>
         </dependency>
 
         <dependency>

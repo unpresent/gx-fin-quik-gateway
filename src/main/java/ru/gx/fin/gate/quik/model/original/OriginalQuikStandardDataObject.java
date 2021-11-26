@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import ru.gx.data.AbstractDataObject;
+import ru.gx.core.data.AbstractDataObject;
 
 /**
  * Базовый тип для DTO (объектов передачи данных) из Quik-а.

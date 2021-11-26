@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
-import ru.gx.data.AbstractDataPackage;
+import ru.gx.core.data.AbstractDataPackage;
 
 import java.util.Collection;
 

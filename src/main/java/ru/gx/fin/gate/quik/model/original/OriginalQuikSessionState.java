@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import ru.gx.data.AbstractDataObject;
+import ru.gx.core.data.AbstractDataObject;
 
 import java.time.LocalTime;
 

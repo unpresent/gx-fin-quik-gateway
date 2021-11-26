@@ -3,7 +3,7 @@ package json2.memdata;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 import org.jetbrains.annotations.NotNull;
-import ru.gx.data.AbstractDataObject;
+import ru.gx.core.data.AbstractDataObject;
 
 import java.util.HashMap;
 import java.util.Map;
