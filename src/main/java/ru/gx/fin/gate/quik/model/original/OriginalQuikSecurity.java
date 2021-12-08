@@ -19,6 +19,12 @@ import java.math.BigDecimal;
 @ToString
 public class OriginalQuikSecurity extends OriginalQuikStandardDataObject {
     /**
+     * Текущая сессия
+     */
+    @JsonProperty(value = "session_id")
+    private String sessionId;
+
+    /**
      * Код инструмента
      */
     @JsonProperty(value = "code")
