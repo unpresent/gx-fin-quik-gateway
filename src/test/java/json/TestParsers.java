@@ -73,27 +73,29 @@ public class TestParsers {
     @Test
     public void testJson2AllTrade() throws Exception {
         //*
-        String testMessage = "{\n" +
-                "            \"row_index\": \"1\",\n" +
-                "            \"trade_num\": \"3518016102\",\n" +
-                "            \"flags\": \"1025\",\n" +
-                "            \"price\": \"0.79\",\n" +
-                "            \"qty\": \"25.0\",\n" +
-                "            \"value\": \"19750.0\",\n" +
-                "            \"accruedint\": \"0.0\",\n" +
-                "            \"yield\": \"0.0\",\n" +
-                "            \"settlecode\": \"Y2\",\n" +
-                "            \"reporate\": \"0.0\",\n" +
-                "            \"repovalue\": \"0.0\",\n" +
-                "            \"repo2value\": \"0.0\",\n" +
-                "            \"repoterm\": \"0\",\n" +
-                "            \"sec_code\": \"HYDR\",\n" +
-                "            \"class_code\": \"TQBR\",\n" +
-                "            \"datetime\": \"2021-01-25T09:59:31.000\",\n" +
-                "            \"period\": \"0\",\n" +
-                "            \"open_interest\": \"0\",\n" +
-                "            \"exchange_code\": \"\"\n" +
-                "}\n";
+        String testMessage = """
+                {
+                            "row_index": "1",
+                            "trade_num": "3518016102",
+                            "flags": "1025",
+                            "price": "0.79",
+                            "qty": "25.0",
+                            "value": "19750.0",
+                            "accruedint": "0.0",
+                            "yield": "0.0",
+                            "settlecode": "Y2",
+                            "reporate": "0.0",
+                            "repovalue": "0.0",
+                            "repo2value": "0.0",
+                            "repoterm": "0",
+                            "sec_code": "HYDR",
+                            "class_code": "TQBR",
+                            "datetime": "2021-01-25 09:59:31.000",
+                            "period": "0",
+                            "open_interest": "0",
+                            "exchange_code": ""
+                }
+                """;
         final var objectMapper = getObjectMapper();
 
         OriginalQuikAllTrade testOriginalQuikAllTrade = objectMapper.readValue(testMessage, OriginalQuikAllTrade.class);
@@ -104,10 +106,12 @@ public class TestParsers {
 
     @Test
     public void testJson2AllTradesPackageShort() throws Exception {
-        String testMessage = "{\n" +
-                "    \"all_count\": 1457762,\n" +
-                "    \"package_size\": 18\n" +
-                "}\n";
+        String testMessage = """
+                {
+                    "all_count": 1457762,
+                    "package_size": 18
+                }
+                """;
         final var objectMapper = getObjectMapper();
 
         TestPackage testPackage = objectMapper.readValue(testMessage, TestPackage.class);
@@ -119,52 +123,54 @@ public class TestParsers {
     @Test
     public void testJson2AllTradesPackage() throws Exception {
         //*
-        String testMessage = "{\n" +
-                "    \"all_count\": 1457762,\n" +
-                "    \"package_size\": 18,\n" +
-                "    \"rows\": [{\n" +
-                "            \"row_index\": \"1\",\n" +
-                "            \"trade_num\": \"3518016102\",\n" +
-                "            \"flags\": \"1025\",\n" +
-                "            \"price\": \"0.79\",\n" +
-                "            \"qty\": \"25.0\",\n" +
-                "            \"value\": \"19750.0\",\n" +
-                "            \"accruedint\": \"0.0\",\n" +
-                "            \"yield\": \"0.0\",\n" +
-                "            \"settlecode\": \"Y2\",\n" +
-                "            \"reporate\": \"0.0\",\n" +
-                "            \"repovalue\": \"0.0\",\n" +
-                "            \"repo2value\": \"0.0\",\n" +
-                "            \"repoterm\": \"0\",\n" +
-                "            \"sec_code\": \"HYDR\",\n" +
-                "            \"class_code\": \"TQBR\",\n" +
-                "            \"datetime\": \"2021-01-25T09:59:31.000\",\n" +
-                "            \"period\": \"0\",\n" +
-                "            \"open_interest\": \"0\",\n" +
-                "            \"exchange_code\": \"\"\n" +
-                "        }, {\n" +
-                "            \"row_index\": \"2\",\n" +
-                "            \"trade_num\": \"3518016103\",\n" +
-                "            \"flags\": \"1025\",\n" +
-                "            \"price\": \"0.79\",\n" +
-                "            \"qty\": \"100.0\",\n" +
-                "            \"value\": \"79000.0\",\n" +
-                "            \"accruedint\": \"0.0\",\n" +
-                "            \"yield\": \"0.0\",\n" +
-                "            \"settlecode\": \"Y2\",\n" +
-                "            \"reporate\": \"0.0\",\n" +
-                "            \"repovalue\": \"0.0\",\n" +
-                "            \"repo2value\": \"0.0\",\n" +
-                "            \"repoterm\": \"0\",\n" +
-                "            \"sec_code\": \"HYDR\",\n" +
-                "            \"class_code\": \"TQBR\",\n" +
-                "            \"datetime\": \"2021-01-25T09:59:31.000\",\n" +
-                "            \"period\": \"0\",\n" +
-                "            \"open_interest\": \"0\",\n" +
-                "            \"exchange_code\": \"\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}\n";
+        String testMessage = """
+                {
+                    "all_count": 1457762,
+                    "package_size": 18,
+                    "rows": [{
+                            "row_index": "1",
+                            "trade_num": "3518016102",
+                            "flags": "1025",
+                            "price": "0.79",
+                            "qty": "25.0",
+                            "value": "19750.0",
+                            "accruedint": "0.0",
+                            "yield": "0.0",
+                            "settlecode": "Y2",
+                            "reporate": "0.0",
+                            "repovalue": "0.0",
+                            "repo2value": "0.0",
+                            "repoterm": "0",
+                            "sec_code": "HYDR",
+                            "class_code": "TQBR",
+                            "datetime": "2021-01-25 09:59:31.000",
+                            "period": "0",
+                            "open_interest": "0",
+                            "exchange_code": ""
+                        }, {
+                            "row_index": "2",
+                            "trade_num": "3518016103",
+                            "flags": "1025",
+                            "price": "0.79",
+                            "qty": "100.0",
+                            "value": "79000.0",
+                            "accruedint": "0.0",
+                            "yield": "0.0",
+                            "settlecode": "Y2",
+                            "reporate": "0.0",
+                            "repovalue": "0.0",
+                            "repo2value": "0.0",
+                            "repoterm": "0",
+                            "sec_code": "HYDR",
+                            "class_code": "TQBR",
+                            "datetime": "2021-01-25 09:59:31.000",
+                            "period": "0",
+                            "open_interest": "0",
+                            "exchange_code": ""
+                        }
+                    ]
+                }
+                """;
         final var objectMapper = getObjectMapper();
         final var tradesPackage = objectMapper.readValue(testMessage, OriginalQuikAllTradesPackage.class);
 

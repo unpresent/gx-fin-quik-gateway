@@ -1,11 +1,11 @@
 package json2;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import json2.model.TestMainObject;
 import json2.model.TestRefObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.annotation.Testable;
-import org.testcontainers.shaded.com.fasterxml.jackson.core.JsonProcessingException;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.UUID;
