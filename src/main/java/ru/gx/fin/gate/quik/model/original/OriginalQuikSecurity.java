@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @Setter
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 public class OriginalQuikSecurity extends OriginalQuikStandardDataObject {
     /**
      * Текущая сессия

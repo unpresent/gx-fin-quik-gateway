@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@ToString
+@ToString(callSuper = true)
 public class OriginalQuikOrder extends OriginalQuikStandardDataObject {
     /**
      * Номер заявки в торговой системе
