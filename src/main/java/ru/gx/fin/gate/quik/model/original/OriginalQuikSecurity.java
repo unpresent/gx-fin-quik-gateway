@@ -91,6 +91,12 @@ public class OriginalQuikSecurity extends OriginalQuikStandardDataObject {
     private String isinCode;
 
     /**
+     * Валюта котировок и сделок в у данного ФИ в данном режиме
+     */
+    @JsonProperty(value = "currencyid")
+    private String currencyId;
+
+    /**
      * Минимальный шаг цены
      */
     @JsonProperty(value = "min_price_step")
