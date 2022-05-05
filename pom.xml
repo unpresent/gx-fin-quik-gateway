@@ -6,15 +6,15 @@
     <groupId>ru.gx.fin.gate.quik</groupId>
     <artifactId>gx-fin-quik-gateway</artifactId>
     <packaging>jar</packaging>
-    <version>1.4.3</version>
+    <version>2.0.0</version>
 
     <properties>
         <encoding>UTF-8</encoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <spring-boot-maven-plugin.version>2.6.2</spring-boot-maven-plugin.version>
-        <gx-core-dependencies.version>1.4.3</gx-core-dependencies.version>
+        <maven-compiler-plugin.version>3.10.0</maven-compiler-plugin.version>
+        <spring-boot-maven-plugin.version>2.6.7</spring-boot-maven-plugin.version>
+        <gx-core-dependencies.version>1.4.11</gx-core-dependencies.version>
     </properties>
 
     <dependencyManagement>
@@ -47,7 +47,7 @@
 
         <dependency>
             <groupId>ru.gx.core</groupId>
-            <artifactId>gx-starter</artifactId>
+            <artifactId>gx-core-root-starter</artifactId>
         </dependency>
 
         <dependency>
